@@ -12,8 +12,6 @@ public class ObjectMovementController : MonoBehaviour {
     private int fromPoint;
     private int toPoint;
 
-    public float percentage;
-
 	// Use this for initialization
 	void Start ()
     {
@@ -35,7 +33,7 @@ public class ObjectMovementController : MonoBehaviour {
     Vector3 CalcTranslation(Vector2 playerPos)
     {
         float length = Mathf.Abs(startMovingPoint - endMovingPoint);
-        //float percentage;
+        float percentage;
         if (startMovingPoint < endMovingPoint) percentage = (player.transform.position.x - startMovingPoint) / length; // OVERALL percentage
         else                                   percentage = (startMovingPoint - player.transform.position.x) / length; // OVERALL percentage
         UpdateFromAndTo(percentage);
