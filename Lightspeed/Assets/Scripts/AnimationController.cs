@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour {
 
     private new Animator animator;
+    private bool isJumping = false;
 
 	// Use this for initialization
 	void Start () {
@@ -13,15 +14,15 @@ public class AnimationController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetAxis("Horizontal") != 0)
-            animator.SetBool("isRunning", true);
-        else
-            animator.SetBool("isRunning", false);
+        Vector2 vel = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        animator.SetFloat("VelocityX", vel.x);
+        animator.SetFloat("VelocityY", vel.y);
+        animator.SetBool("isJumping", isJumping);
 
-        if (Input.GetAxis("Vertical") != 0)
-            animator.SetBool("isJumping", true);
-        else
-            animator.SetBool("isJumping", false);
+    }
 
+    public void SetIsJumping(bool b)
+    {
+        isJumping = b;
     }
 }
