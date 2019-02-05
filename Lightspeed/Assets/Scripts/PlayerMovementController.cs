@@ -6,7 +6,7 @@ public class PlayerMovementController : MonoBehaviour {
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D playerBody;
-    private int numBlocksStandingOn = 0;
+    private List<GameObject> blocksStandingOn = new List<GameObject>();
 
     //add bounds for these 2
     public float speed;
@@ -32,6 +32,7 @@ public class PlayerMovementController : MonoBehaviour {
         }
 
         playerBody.velocity = new Vector2(Input.GetAxis("Horizontal") * speed, playerBody.velocity.y);
+
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
             animController.SetIsJumping(true);
@@ -39,19 +40,12 @@ public class PlayerMovementController : MonoBehaviour {
             canJump = false;
         }
 
-        if(numBlocksStandingOn > 0)
-        {
-            canJump = true;
-            animController.SetIsJumping(false);
-        }
-
-        Debug.Log("PlayerMovementController.Update -- numBlocksStandingOn:" + numBlocksStandingOn);
 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("PlayerMovementController.OnCollisionEnter2D -- collided with " + collision.gameObject.tag);
+        //Debug.Log("PlayerMovementController.OnCollisionEnter2D -- collided with " + collision.gameObject.tag);
 
         if (collision.gameObject.CompareTag("collidable"))
         {
@@ -65,7 +59,8 @@ public class PlayerMovementController : MonoBehaviour {
             if(contactPoint.y > center.y)
             {
                 animController.SetIsJumping(false);
-                numBlocksStandingOn++;
+                blocksStandingOn.Add(collision.gameObject);
+                canJump = true;
             }
             
         }
@@ -74,16 +69,13 @@ public class PlayerMovementController : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("collidable"))
         {
-            Collider2D col = collision.collider;
-
-            Vector3 contactPoint = collision.contacts[0].point;
-            Vector3 center = col.bounds.center;
-
-            //bool right = contactPoint.x > center.x;
-            //bool top = contactPoint.y > center.y;
-            if (contactPoint.y > center.y)
+            if (blocksStandingOn.Contains(collision.gameObject))
             {
-                numBlocksStandingOn--;
+                blocksStandingOn.Remove(collision.gameObject);
+            }
+            if(blocksStandingOn.Count == 0)
+            {
+                animController.SetIsJumping(true);
             }
 
         }

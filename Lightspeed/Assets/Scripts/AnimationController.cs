@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour {
 
-    private new Animator animator;
+    private Animator ani;
+    private Rigidbody2D rb2d;
     private bool isJumping = false;
 
 	// Use this for initialization
 	void Start () {
-        animator = GetComponent<Animator>();
+        ani = GetComponent<Animator>();
+        rb2d = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Vector2 vel = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        animator.SetFloat("VelocityX", vel.x);
-        animator.SetFloat("VelocityY", vel.y);
-        animator.SetBool("isJumping", isJumping);
+        Vector2 vel = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+        ani.SetFloat("VelocityX", vel.x);
+        ani.SetFloat("VelocityY", vel.y);
+        ani.SetBool("isJumping", isJumping);
 
     }
 
