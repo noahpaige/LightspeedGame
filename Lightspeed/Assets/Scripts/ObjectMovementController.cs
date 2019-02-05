@@ -8,6 +8,7 @@ public class ObjectMovementController : MonoBehaviour {
     public float startMovingPoint;
     public float endMovingPoint;
     public GameObject player;
+    public float ease;
 
     private int fromPoint;
     private int toPoint;
@@ -27,7 +28,7 @@ public class ObjectMovementController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        transform.position = CalcTranslation(player.transform.position);
+        transform.position = Ease(CalcTranslation(player.transform.position));
 	}
 
     Vector3 CalcTranslation(Vector2 playerPos)
@@ -71,5 +72,10 @@ public class ObjectMovementController : MonoBehaviour {
                 Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
             }
         }
+    }
+
+    private Vector3 Ease(Vector3 desiredPos)
+    {
+        return Vector3.Lerp(transform.position, new Vector3(desiredPos.x, desiredPos.y, transform.position.z), ease);
     }
 }

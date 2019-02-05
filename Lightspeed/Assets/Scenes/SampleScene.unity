@@ -3931,7 +3931,7 @@ ParticleSystem:
       type: 0
       properties: 0
   LightsModule:
-    enabled: 0
+    enabled: 1
     ratio: 1
     light: {fileID: 1906939088}
     randomDistribution: 1
@@ -5501,6 +5501,7 @@ MonoBehaviour:
   startMovingPoint: 10
   endMovingPoint: 20
   player: {fileID: 1351477304}
+  ease: 0.2
 --- !u!4 &437528353
 Transform:
   m_ObjectHideFlags: 0
@@ -6259,6 +6260,7 @@ MonoBehaviour:
   startMovingPoint: 0
   endMovingPoint: 10
   player: {fileID: 1351477304}
+  ease: 0.2
 --- !u!4 &772641020
 Transform:
   m_ObjectHideFlags: 0
@@ -7815,6 +7817,7 @@ MonoBehaviour:
   startMovingPoint: 10
   endMovingPoint: 20
   player: {fileID: 1351477304}
+  ease: 0.2
 --- !u!4 &1782996928
 Transform:
   m_ObjectHideFlags: 0
@@ -10474,12 +10477,12 @@ ParticleSystem:
         m_RotationOrder: 4
     inWorldSpace: 0
   InheritVelocityModule:
-    enabled: 0
+    enabled: 1
     m_Mode: 0
     m_Curve:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.7
       minScalar: 0
       maxCurve:
         serializedVersion: 2
