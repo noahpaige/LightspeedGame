@@ -26,5 +26,6 @@ public class AnimationController : MonoBehaviour {
     public void SetIsJumping(bool b)
     {
         isJumping = b;
+        //Debug.Log("Jumping: " + isJumping);
     }
 }

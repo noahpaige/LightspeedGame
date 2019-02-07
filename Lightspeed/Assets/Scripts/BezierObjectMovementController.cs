@@ -55,12 +55,12 @@ public class BezierObjectMovementController : MonoBehaviour {
         {
             if (percentage > (float)toPoint / (points.Length))
             {
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- Incrementing. " + percentage + " > " + (float)toPoint / (points.Length));
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- Incrementing. " + percentage + " > " + (float)toPoint / (points.Length));
                 fromPoint += 3;
                 midPoint += 3;
                 toPoint += 3;
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- to  : " + toPoint);
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- from: " + fromPoint);
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- to  : " + toPoint);
                 return;
             }
         }
@@ -68,13 +68,13 @@ public class BezierObjectMovementController : MonoBehaviour {
         {
             if (percentage < (float)fromPoint / (points.Length))
             {
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- Decrementing.        " + percentage + " < " + (float)fromPoint / (points.Length));
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- Decrementing.        " + percentage + " < " + (float)fromPoint / (points.Length));
 
                 fromPoint -= 3;
                 midPoint -= 3;
                 toPoint -= 3;
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                Debug.Log("BezierObjectMovementController.updateFromAndTo -- to  : " + toPoint);
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- from: " + fromPoint);
+                //Debug.Log("BezierObjectMovementController.updateFromAndTo -- to  : " + toPoint);
             }
         }
     }
@@ -84,5 +84,18 @@ public class BezierObjectMovementController : MonoBehaviour {
         var ab = Vector2.Lerp(a, b, t);
         var bc = Vector2.Lerp(b, c, t);
         return Vector2.Lerp(ab, bc, t);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        float gizWidth = 0.1f;
+        //Gizmos.color = Color.red;
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(new Vector3(points[i].x, points[i].y, -1f), gizWidth);
+        }
+
     }
 }

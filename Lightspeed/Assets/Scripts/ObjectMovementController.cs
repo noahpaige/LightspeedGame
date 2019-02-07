@@ -52,11 +52,11 @@ public class ObjectMovementController : MonoBehaviour {
         {
             if(percentage > (float)toPoint / (points.Length - 1))
             {
-                Debug.Log("ObjectMovementController.updateFromAndTo -- Incrementing. " + percentage + " > " + (float)toPoint / (points.Length - 1));
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- Incrementing. " + percentage + " > " + (float)toPoint / (points.Length - 1));
                 fromPoint++;
                 toPoint++;
-                Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
                 return;
             }
         }
@@ -64,12 +64,12 @@ public class ObjectMovementController : MonoBehaviour {
         {
             if(percentage < (float)fromPoint / (points.Length - 1))
             {
-                Debug.Log("ObjectMovementController.updateFromAndTo -- Decrementing.        " + percentage + " < " + (float)fromPoint / (points.Length - 1));
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- Decrementing.        " + percentage + " < " + (float)fromPoint / (points.Length - 1));
                 
                 fromPoint--;
                 toPoint--;
-                Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
+                //Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
             }
         }
     }
@@ -77,5 +77,19 @@ public class ObjectMovementController : MonoBehaviour {
     private Vector3 Ease(Vector3 desiredPos)
     {
         return Vector3.Lerp(transform.position, new Vector3(desiredPos.x, desiredPos.y, transform.position.z), ease);
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        float gizWidth = 0.1f;
+        //Gizmos.color = Color.red;
+
+        for(int i = 0; i < points.Length; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(new Vector3(points[i].x, points[i].y, -1f), gizWidth);
+        }
+        
     }
 }
