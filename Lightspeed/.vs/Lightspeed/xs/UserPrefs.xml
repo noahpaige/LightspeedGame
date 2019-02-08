@@ -1,8 +1,9 @@
 ﻿<Properties StartupConfiguration="{3FC44C6B-2536-7617-74AD-9DE5BDC4E21C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AnimationController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CharacterController2D.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerMovementController.cs" Line="7" Column="42" />
-      <File FileName="Assets/Scripts/AnimationController.cs" Line="21" Column="33" />
+      <File FileName="Assets/WinCheckController.cs" Line="5" Column="50" />
+      <File FileName="Assets/GameController.cs" Line="21" Column="6" />
+      <File FileName="Assets/Scripts/CharacterController2D.cs" Line="104" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
