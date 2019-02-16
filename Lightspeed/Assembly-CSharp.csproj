@@ -67,7 +67,9 @@
     <Compile Include="Assets\Scripts\CharacterController2D.cs" />
     <Compile Include="Assets\Scripts\ColorLerpController.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\LightMovementController.cs" />
     <Compile Include="Assets\Scripts\ObjectMovementController.cs" />
+    <Compile Include="Assets\Scripts\PlatformMovementController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\WinCheckController.cs" />
     <Reference Include="UnityEditor.StandardEvents">

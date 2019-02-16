@@ -28,6 +28,6 @@ public class ColorLerpController : MonoBehaviour {
         if (flip)
             rend.color = Color.Lerp(Color2, Color1, Mathf.Abs((pos % step) / step));
         else
-            rend.color = Color.Lerp(Color2, Color1, Mathf.Abs((pos % step) / step));
+            rend.color = Color.Lerp(Color1, Color2, Mathf.Abs((pos % step) / step));
     }
 }
