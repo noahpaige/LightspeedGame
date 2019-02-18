@@ -14,6 +14,8 @@ public class PlatformMovementController : MonoBehaviour
 
     private int fromPoint;
     private int toPoint;
+    private float prevPercentage; // the % representing where the player is between startMovingPoint and endMovingPoint
+    private float actualPercentage; // the % representing where the platform is between points[0] and points[points.length - 1]
 
     // Use this for initialization
     void Start()
@@ -24,7 +26,7 @@ public class PlatformMovementController : MonoBehaviour
             fromPoint = 0;
             toPoint = 1;
         }
-        transform.position = new Vector3(points[0].x, points[0].y, transform.position.z);
+        transform.position = new Vector3(points[fromPoint].x, points[fromPoint].y, transform.position.z);
 
     }
 
@@ -32,22 +34,27 @@ public class PlatformMovementController : MonoBehaviour
     void Update()
     {
         rb.MovePosition(Ease(CalcTranslation(player.transform.position)));
-        //MoveChildrenRigidbodies(Ease(CalcTranslation(player.transform.position)));
-        //transform.position = Ease(CalcTranslation(player.transform.position));
     }
 
     Vector2 CalcTranslation(Vector2 playerPos)
     {
         float length = Mathf.Abs(startMovingPoint - endMovingPoint);
+
         float percentage;
         if (startMovingPoint < endMovingPoint) percentage = (player.transform.position.x - startMovingPoint) / length; // OVERALL percentage
         else percentage = (startMovingPoint - player.transform.position.x) / length; // OVERALL percentage
+        float adjustedPercentage = (percentage - (fromPoint / (points.Length - 1))) * (points.Length - 1) - fromPoint; // percentage between fromPoint and toPoint
+        actualPercentage = (float)Mathf.Min(fromPoint, toPoint) / (points.Length - 1) +
+                            (Vector3.Distance(points[fromPoint], transform.position) / Vector3.Distance(points[fromPoint], points[toPoint])) / (points.Length - 1);
+
+        Debug.Log("PlatformMovementController - CalcTranslation : Percentage = " + percentage + " adjusted = " + adjustedPercentage + " actual = " + actualPercentage);
+        //(float)(points.Length - 1 - Mathf.Max(fromPoint, toPoint)) / (points.Length - 1);
         UpdateFromAndTo(percentage);
-        percentage = (percentage - (fromPoint / (points.Length - 1))) * (points.Length - 1) - fromPoint; // percentage between fromPoint and toPoint
+
         //Debug.Log("ObjectMovementController.updateFromAndTo -- ADJUSTED PERCENTAGE = " + percentage);
         return Vector2.Lerp(points[fromPoint],
                             points[toPoint],
-                            percentage);
+                            adjustedPercentage);
     }
 
     // takes the OVERALL percentage
