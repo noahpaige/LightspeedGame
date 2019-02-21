@@ -1707,7 +1707,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6.3316593
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -8383,7 +8383,22 @@ Prefab:
     - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
         type: 2}
       propertyPath: points.Array.data[0].x
-      value: 10
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[0].y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[1].y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[2].y
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e14ec33c723d64499bf1cea297a98c9, type: 2}
@@ -13399,6 +13414,21 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 384283695}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[0].y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[1].y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114422798452249874, guid: 1e14ec33c723d64499bf1cea297a98c9,
+        type: 2}
+      propertyPath: points.Array.data[2].y
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e14ec33c723d64499bf1cea297a98c9, type: 2}
   m_IsPrefabAsset: 0

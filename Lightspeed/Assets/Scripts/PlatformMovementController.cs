@@ -14,7 +14,7 @@ public class PlatformMovementController : MonoBehaviour
 
     private int fromPoint;
     private int toPoint;
-    private float prevPercentage = 0f; // the % representing where the player is between startMovingPoint and endMovingPoint
+    public float prevPercentage = 0f; // the % representing where the player is between startMovingPoint and endMovingPoint
 
     private bool playerWasInWindow = false;
     private Vector2 prevPlayerPos = Vector2.zero;
@@ -37,6 +37,7 @@ public class PlatformMovementController : MonoBehaviour
     {
         //rb.MovePosition(Ease(CalcTranslation(player.transform.position)));
         rb.MovePosition(Ease(CalcX(player.transform.position)));
+        prevPercentage = Mathf.Max(prevPercentage, 0f);
     }
 
     Vector2 CalcX(Vector2 playerPos)
