@@ -11,12 +11,15 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+    [SerializeField] private Transform m_LeftCheck;                             // A position marking where to check is touching something to their left
+    [SerializeField] private Transform m_RightCheck;                            // A position marking where to check is touching something to their right
 
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
-    const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+    const float k_PlayerWidthRadius = .2f;                                      // Radius of the overlap area for player width
+    const float k_PlayerHeightRadius = 1.081f;                                  // Radius of the overlap area for player height
+    const float k_AreaCheckWidth = 0.05f;
+    private bool m_Grounded;                                                    // Whether or not the player is grounded.
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+    private bool m_FacingRight = true;                                          // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
 
@@ -50,23 +53,10 @@ public class CharacterController2D : MonoBehaviour
     private void FixedUpdate()
     {
         bool wasGrounded = m_Grounded;
-        m_Grounded = false;
+        m_Grounded = IsPlayerTouchingGround();
 
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i].gameObject != gameObject)
-            {
-                m_Grounded = true;
-                if (!wasGrounded)
-                {
-                    animationController.SetIsJumping(false);
-                    OnLandEvent.Invoke();
-                }
-            }
-        }
+        if(m_Grounded && !wasGrounded) OnLandEvent.Invoke();
+
         animationController.SetIsJumping(!m_Grounded);
     }
 
@@ -116,5 +106,98 @@ public class CharacterController2D : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public bool IsPlayerTouchingGround()
+    {
+        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_GroundCheck.position.x - k_PlayerWidthRadius, m_GroundCheck.position.y - k_AreaCheckWidth),
+                                                          new Vector2(m_GroundCheck.position.x + k_PlayerWidthRadius, m_GroundCheck.position.y + k_AreaCheckWidth),
+                                                          m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsPlayerTouchingCeiling()
+    {
+        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_CeilingCheck.position.x - k_PlayerWidthRadius, m_CeilingCheck.position.y - k_AreaCheckWidth),
+                                                          new Vector2(m_CeilingCheck.position.x + k_PlayerWidthRadius, m_CeilingCheck.position.y + k_AreaCheckWidth),
+                                                          m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsPlayerTouchingLeft()
+    {
+        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_LeftCheck.position.x - k_AreaCheckWidth, m_LeftCheck.position.y - k_PlayerHeightRadius),
+                                                          new Vector2(m_LeftCheck.position.x + k_AreaCheckWidth, m_LeftCheck.position.y + k_PlayerHeightRadius),
+                                                          m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsPlayerTouchingRight()
+    {
+        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
+        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_RightCheck.position.x - k_AreaCheckWidth, m_RightCheck.position.y - k_PlayerHeightRadius),
+                                                          new Vector2(m_RightCheck.position.x + k_AreaCheckWidth, m_RightCheck.position.y + k_PlayerHeightRadius),
+                                                          m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsPositionTouchingAbove(Vector2 pos)
+    {
+        Rect rect = new Rect(m_CeilingCheck.position.x - k_PlayerWidthRadius,
+                             m_CeilingCheck.position.y - k_AreaCheckWidth,
+                             m_CeilingCheck.position.x + k_PlayerWidthRadius,
+                             m_CeilingCheck.position.y + k_AreaCheckWidth);
+        return rect.Contains(pos);
+    }
+    public bool IsPositionTouchingBelow(Vector2 pos)
+    {
+        Rect rect = new Rect(m_GroundCheck.position.x - k_PlayerWidthRadius,
+                             m_GroundCheck.position.y - k_AreaCheckWidth,
+                             m_GroundCheck.position.x + k_PlayerWidthRadius,
+                             m_GroundCheck.position.y + k_AreaCheckWidth);
+        return rect.Contains(pos);
+    }
+    public bool IsPositionTouchingLeft(Vector2 pos)
+    {
+        Rect rect = new Rect(m_LeftCheck.position.x - k_AreaCheckWidth,
+                             m_LeftCheck.position.y - k_PlayerHeightRadius,
+                             m_LeftCheck.position.x + k_AreaCheckWidth,
+                             m_LeftCheck.position.y + k_PlayerHeightRadius);
+        return rect.Contains(pos);
+    }
+    public bool IsPositionTouchingRight(Vector2 pos)
+    {
+        Rect rect = new Rect(m_RightCheck.position.x - k_AreaCheckWidth,
+                             m_RightCheck.position.y - k_PlayerHeightRadius,
+                             m_RightCheck.position.x + k_AreaCheckWidth,
+                             m_RightCheck.position.y + k_PlayerHeightRadius);
+        return rect.Contains(pos);
     }
 }

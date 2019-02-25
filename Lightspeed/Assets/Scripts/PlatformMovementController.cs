@@ -19,6 +19,7 @@ public class PlatformMovementController : MonoBehaviour
     private bool playerWasInWindow = false;
     private Vector2 prevPlayerPos = Vector2.zero;
 
+
     // Use this for initialization
     void Start()
     {
@@ -67,27 +68,43 @@ public class PlatformMovementController : MonoBehaviour
     {
         UpdateFromAndTo(percentage);
         float adjustedPercentage = (percentage - (fromPoint / (points.Length - 1))) * (points.Length - 1) - fromPoint; // percentage between fromPoint and toPoint
-        //Debug.Log("percentage: " + percentage);
         Vector2 moveTowards;
         moveTowards = Vector2.Lerp(points[fromPoint], points[toPoint], adjustedPercentage);
         Collider2D[] colliders = Physics2D.OverlapBoxAll(moveTowards, new Vector2(2f * tileWidth, tileWidth), transform.rotation.z);
 
-
         float savedPrevPercentage = prevPercentage;
         foreach(Collider2D col in colliders)
         {
-
-            
             if (col.CompareTag("collidable") && col.gameObject.transform.parent.gameObject != this.gameObject)
             {
-                Debug.Log("found " + col.gameObject.name);
-                UpdateFromAndTo(prevPercentage);
-                //moveTowards = new Vector2(rb.position.x + );
                 prevPercentage = savedPrevPercentage;
+                UpdateFromAndTo(prevPercentage);
+                break;
+            }
+            else if (col.CompareTag("Player") && col.gameObject.transform.parent.gameObject != this.gameObject)
+            {
+                //TODO:
+                //  - check if player is being squished
+                prevPercentage = savedPrevPercentage;
+                UpdateFromAndTo(prevPercentage);
                 break;
             }
             else prevPercentage = percentage;
         }
+        /*
+        foreach (Collider2D col in colliders)
+        {
+            if (col.CompareTag("Player") && col.gameObject.transform.parent.gameObject != this.gameObject)
+            {
+                prevPercentage = savedPrevPercentage;
+                UpdateFromAndTo(prevPercentage);
+                playerWasColliding = true;
+                break;
+            }
+            else prevPercentage = percentage;
+        }
+        */
+
         return moveTowards;
     }
 
@@ -99,11 +116,8 @@ public class PlatformMovementController : MonoBehaviour
         {
             if (percentage > (float)toPoint / (points.Length - 1))
             {
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- Incrementing. " + percentage + " > " + (float)toPoint / (points.Length - 1));
                 fromPoint++;
                 toPoint++;
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
                 return;
             }
         }
@@ -111,12 +125,8 @@ public class PlatformMovementController : MonoBehaviour
         {
             if (percentage < (float)fromPoint / (points.Length - 1))
             {
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- Decrementing.        " + percentage + " < " + (float)fromPoint / (points.Length - 1));
-
                 fromPoint--;
                 toPoint--;
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- from: " + fromPoint);
-                //Debug.Log("ObjectMovementController.updateFromAndTo -- to  : " + toPoint);
             }
         }
     }
@@ -142,5 +152,25 @@ public class PlatformMovementController : MonoBehaviour
         }
         
 
+    }
+
+    private bool IsPlatformSquishingPlayer(Vector2 collisionPos, CharacterController2D charController)
+    {
+        if      (charController.IsPositionTouchingAbove(collisionPos) && charController.IsPlayerTouchingGround())  return true;
+        else if (charController.IsPositionTouchingBelow(collisionPos) && charController.IsPlayerTouchingCeiling()) return true;
+        else if (charController.IsPositionTouchingLeft(collisionPos)  && charController.IsPlayerTouchingRight())   return true;
+        else if (charController.IsPositionTouchingRight(collisionPos) && charController.IsPlayerTouchingLeft())    return true;
+        return false;
+    }
+
+    private Vector3 GetClosestChildToPosition(Vector3 pos)
+    {
+        Vector3 closest = transform.GetChild(0).position;
+        foreach(Transform child in transform)
+        {
+            if (Vector3.Distance(closest, pos) > Vector3.Distance(child.position, pos))
+                closest = child.position;
+        }
+        return closest;
     }
 }
