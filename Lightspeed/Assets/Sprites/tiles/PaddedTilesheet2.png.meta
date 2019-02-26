@@ -65,7 +65,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 240
+  spritePixelsToUnits: 480
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,6 +100,39 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -107,10 +140,10 @@ TextureImporter:
       name: PaddedTilesheet2_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 1032
-        width: 240
-        height: 240
+        x: 14
+        y: 2062
+        width: 484
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,7 +151,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a12a963cf459a4718be02111ffdc3574
+      spriteID: 57a0541ef3e836443a03758138408f90
       vertices: []
       indices: 
       edges: []
@@ -127,10 +160,10 @@ TextureImporter:
       name: PaddedTilesheet2_1
       rect:
         serializedVersion: 2
-        x: 264
-        y: 1032
-        width: 240
-        height: 240
+        x: 527
+        y: 2062
+        width: 482
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,7 +171,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0a3d6144784e040249fb4255a378d8a0
+      spriteID: 35166db43daa6bd4fa0861c2edbb22b9
       vertices: []
       indices: 
       edges: []
@@ -147,10 +180,10 @@ TextureImporter:
       name: PaddedTilesheet2_2
       rect:
         serializedVersion: 2
-        x: 520
-        y: 1032
-        width: 240
-        height: 240
+        x: 1038
+        y: 2060
+        width: 484
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,7 +191,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86fc47448be0742379208bf7830763dd
+      spriteID: bc5338a772fa8c54a9ce71812f8e1004
       vertices: []
       indices: 
       edges: []
@@ -167,10 +200,10 @@ TextureImporter:
       name: PaddedTilesheet2_3
       rect:
         serializedVersion: 2
-        x: 776
-        y: 1032
-        width: 240
-        height: 240
+        x: 1551
+        y: 2062
+        width: 482
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,7 +211,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ca74d88653e049c6b9697de38989d58
+      spriteID: 76a48aac851c12a4e99387218ad39d11
       vertices: []
       indices: 
       edges: []
@@ -187,10 +220,10 @@ TextureImporter:
       name: PaddedTilesheet2_4
       rect:
         serializedVersion: 2
-        x: 1032
-        y: 1032
-        width: 240
-        height: 240
+        x: 2062
+        y: 2062
+        width: 484
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,7 +231,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 001c5afa8fc53477fa7d3b46e7c788c6
+      spriteID: 4a3e916ff9182904ba92286839a63dc9
       vertices: []
       indices: 
       edges: []
@@ -207,10 +240,10 @@ TextureImporter:
       name: PaddedTilesheet2_5
       rect:
         serializedVersion: 2
-        x: 8
-        y: 776
-        width: 240
-        height: 240
+        x: 14
+        y: 1551
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,7 +251,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98c510f19a0e941c28a6206f46819993
+      spriteID: 5af5b8216c606a74a9da8d75f167b720
       vertices: []
       indices: 
       edges: []
@@ -227,10 +260,10 @@ TextureImporter:
       name: PaddedTilesheet2_6
       rect:
         serializedVersion: 2
-        x: 264
-        y: 776
-        width: 240
-        height: 240
+        x: 527
+        y: 1551
+        width: 482
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,7 +271,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3442a57a61cbe47fabbf69e0545128c1
+      spriteID: 2e985b3a50a13e744b27b47ed4287a5c
       vertices: []
       indices: 
       edges: []
@@ -247,10 +280,10 @@ TextureImporter:
       name: PaddedTilesheet2_7
       rect:
         serializedVersion: 2
-        x: 520
-        y: 776
-        width: 240
-        height: 240
+        x: 1038
+        y: 1551
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,7 +291,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bae478b77654a42c9971ca27a46895cd
+      spriteID: a09f3d962dbb1c64180d307f78f95bde
       vertices: []
       indices: 
       edges: []
@@ -267,10 +300,10 @@ TextureImporter:
       name: PaddedTilesheet2_8
       rect:
         serializedVersion: 2
-        x: 776
-        y: 776
-        width: 240
-        height: 240
+        x: 1551
+        y: 1551
+        width: 482
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -278,7 +311,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7616fe64d5b1e416dbc6d99ecb54e9a6
+      spriteID: 633e0a6deadb8f045a4c2d56f973e6bc
       vertices: []
       indices: 
       edges: []
@@ -287,10 +320,10 @@ TextureImporter:
       name: PaddedTilesheet2_9
       rect:
         serializedVersion: 2
-        x: 1032
-        y: 776
-        width: 240
-        height: 240
+        x: 2062
+        y: 1551
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,7 +331,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcecc3999f73346e4815abce516d5bb8
+      spriteID: ffae7d08672ec624f8ff5d6bc78dd7e1
       vertices: []
       indices: 
       edges: []
@@ -307,10 +340,10 @@ TextureImporter:
       name: PaddedTilesheet2_10
       rect:
         serializedVersion: 2
-        x: 8
-        y: 520
-        width: 240
-        height: 240
+        x: 14
+        y: 1038
+        width: 486
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -318,7 +351,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfff1fdafc4bf4a2ca7ff501f70f894f
+      spriteID: 13229c0d08fb6de4d813e7969bd55806
       vertices: []
       indices: 
       edges: []
@@ -327,10 +360,10 @@ TextureImporter:
       name: PaddedTilesheet2_11
       rect:
         serializedVersion: 2
-        x: 264
-        y: 520
-        width: 240
-        height: 240
+        x: 527
+        y: 1038
+        width: 482
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -338,7 +371,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc8eca0962a0f428dbd6efdbfa2b310b
+      spriteID: aba5910034624cc4ea7988ae20704359
       vertices: []
       indices: 
       edges: []
@@ -347,10 +380,10 @@ TextureImporter:
       name: PaddedTilesheet2_12
       rect:
         serializedVersion: 2
-        x: 520
-        y: 520
-        width: 240
-        height: 240
+        x: 1038
+        y: 1038
+        width: 484
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -358,7 +391,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e364ae7b2002b436ebc2805f1da262de
+      spriteID: 24b54e01ec67a4248aadc8a683337235
       vertices: []
       indices: 
       edges: []
@@ -367,10 +400,10 @@ TextureImporter:
       name: PaddedTilesheet2_13
       rect:
         serializedVersion: 2
-        x: 776
-        y: 520
-        width: 240
-        height: 240
+        x: 1551
+        y: 1038
+        width: 482
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -378,7 +411,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6049afa1f691c421ebefd49515829c82
+      spriteID: ca285a4daf3717b4db3cc1238c94c2cd
       vertices: []
       indices: 
       edges: []
@@ -387,10 +420,10 @@ TextureImporter:
       name: PaddedTilesheet2_14
       rect:
         serializedVersion: 2
-        x: 1032
-        y: 520
-        width: 240
-        height: 240
+        x: 2060
+        y: 1038
+        width: 486
+        height: 484
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -398,7 +431,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1df78db328f044d85b72b60f975b1b6b
+      spriteID: bc35555998feac44cbe1f777eab27ce7
       vertices: []
       indices: 
       edges: []
@@ -407,10 +440,10 @@ TextureImporter:
       name: PaddedTilesheet2_15
       rect:
         serializedVersion: 2
-        x: 8
-        y: 264
-        width: 240
-        height: 240
+        x: 14
+        y: 527
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,7 +451,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a582295cfb06a44efab06aa851f54947
+      spriteID: addc6f847da39f448bf6b983ae4eb9a2
       vertices: []
       indices: 
       edges: []
@@ -427,10 +460,10 @@ TextureImporter:
       name: PaddedTilesheet2_16
       rect:
         serializedVersion: 2
-        x: 264
-        y: 264
-        width: 240
-        height: 240
+        x: 527
+        y: 527
+        width: 482
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -438,7 +471,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52305a83ec92747ddbb7f5092c0d5ccd
+      spriteID: dc10302fee79013439bae9920979bfdb
       vertices: []
       indices: 
       edges: []
@@ -447,10 +480,10 @@ TextureImporter:
       name: PaddedTilesheet2_17
       rect:
         serializedVersion: 2
-        x: 520
-        y: 264
-        width: 240
-        height: 240
+        x: 1038
+        y: 527
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -458,7 +491,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e97171f2397849aa912b5433e339361
+      spriteID: bd850cf29f377f649b7ab9334ad176ca
       vertices: []
       indices: 
       edges: []
@@ -467,10 +500,10 @@ TextureImporter:
       name: PaddedTilesheet2_18
       rect:
         serializedVersion: 2
-        x: 776
-        y: 264
-        width: 240
-        height: 240
+        x: 1551
+        y: 527
+        width: 482
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,7 +511,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbddc8dfe767f433f81d2b6ee50e66c9
+      spriteID: 737e27f46afdb35429ca8164e47f1b20
       vertices: []
       indices: 
       edges: []
@@ -487,10 +520,10 @@ TextureImporter:
       name: PaddedTilesheet2_19
       rect:
         serializedVersion: 2
-        x: 1032
-        y: 264
-        width: 240
-        height: 240
+        x: 2062
+        y: 527
+        width: 484
+        height: 482
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -498,7 +531,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae7df5d5629ad402aae8ee20cd2b413b
+      spriteID: a27b28eb5d995cb45ab900253054055c
       vertices: []
       indices: 
       edges: []
@@ -506,7 +539,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 68f3d7139bb5b4018a7452a0ae9653ee
+    spriteID: a93b2bf174e696542a59b61cbdb468a8
     vertices: []
     indices: 
     edges: []

@@ -16,6 +16,7 @@ public class PlatformMovementController : MonoBehaviour
     private int toPoint;
     public float prevPercentage = 0f; // the % representing where the player is between startMovingPoint and endMovingPoint
 
+    public bool dontMove = false;
     private bool playerWasInWindow = false;
     private Vector2 prevPlayerPos = Vector2.zero;
 
@@ -33,10 +34,9 @@ public class PlatformMovementController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        rb.MovePosition(Ease(CalcX(player.transform.position)));
+        if(!dontMove) rb.MovePosition(Ease(CalcX(player.transform.position)));
         prevPercentage = Mathf.Max(prevPercentage, 0f);
     }
 
@@ -69,43 +69,38 @@ public class PlatformMovementController : MonoBehaviour
         float adjustedPercentage = (percentage - (fromPoint / (points.Length - 1))) * (points.Length - 1) - fromPoint; // percentage between fromPoint and toPoint
         Vector2 moveTowards;
         moveTowards = Vector2.Lerp(points[fromPoint], points[toPoint], adjustedPercentage);
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(moveTowards, new Vector2(2f * tileWidth, tileWidth), transform.rotation.z);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(moveTowards, new Vector2(2f * tileWidth + 0.05f, tileWidth + 0.05f), transform.rotation.z);
+        //Debug.Log("Collider " + transform.name + " length: " + colliders.Length);
 
         float savedPrevPercentage = prevPercentage;
         foreach(Collider2D col in colliders)
         {
-            if (col.CompareTag("collidable") && col.gameObject.transform.parent.gameObject != this.gameObject)
+            if (col.CompareTag("collidable") && col.gameObject.transform.parent.parent.gameObject != this.gameObject)
             {
                 prevPercentage = savedPrevPercentage;
                 UpdateFromAndTo(prevPercentage);
-                break;
+                return moveTowards;
             }
-            else if (col.CompareTag("Player") && col.gameObject.transform.parent.gameObject != this.gameObject)
+            /*
+            else if (col.CompareTag("Player"))
             {
-                //TODO:
-                //  - check if player is being squished
-                Vector3 closestChild = GetClosestChildToPosition(col.GetContacts())
-                if(IsPlatformSquishingPlayer(col.getcon, col.gameObject.GetComponent<CharacterController2D>()))
-                prevPercentage = savedPrevPercentage;
-                UpdateFromAndTo(prevPercentage);
-                break;
+                Debug.Log("Platform Collided with player");
+                Vector3 moveAmount = transform.position - new Vector3(moveTowards.x, moveTowards.y, transform.position.z);
+                foreach(Transform child in transform)
+                {
+                    if (col.GetComponent<CharacterController2D>().IsPlayerSquished(child.gameObject, moveAmount))
+                    {
+                        Debug.Log("PLAYER SQUISHED");
+                        prevPercentage = savedPrevPercentage;
+                        UpdateFromAndTo(prevPercentage);
+                        return moveTowards;
+                    }
+                }
+                prevPercentage = percentage;
             }
+            */
             else prevPercentage = percentage;
         }
-        /*
-        foreach (Collider2D col in colliders)
-        {
-            if (col.CompareTag("Player") && col.gameObject.transform.parent.gameObject != this.gameObject)
-            {
-                prevPercentage = savedPrevPercentage;
-                UpdateFromAndTo(prevPercentage);
-                playerWasColliding = true;
-                break;
-            }
-            else prevPercentage = percentage;
-        }
-        */
-
         return moveTowards;
     }
 
@@ -153,15 +148,6 @@ public class PlatformMovementController : MonoBehaviour
         }
         
 
-    }
-
-    private bool IsPlatformSquishingPlayer(Vector2 collisionPos, CharacterController2D charController)
-    {
-        if      (charController.IsPositionTouchingAbove(collisionPos) && charController.IsPlayerTouchingGround())  return true;
-        else if (charController.IsPositionTouchingBelow(collisionPos) && charController.IsPlayerTouchingCeiling()) return true;
-        else if (charController.IsPositionTouchingLeft(collisionPos)  && charController.IsPlayerTouchingRight())   return true;
-        else if (charController.IsPositionTouchingRight(collisionPos) && charController.IsPlayerTouchingLeft())    return true;
-        return false;
     }
 
     private Transform GetClosestChildToPosition(Vector3 pos)

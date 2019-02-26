@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
-//Code from https://github.com/Brackeys/2D-Character-Controller
+//Code based on: https://github.com/Brackeys/2D-Character-Controller
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -53,6 +53,24 @@ public class CharacterController2D : MonoBehaviour
         animationController = GetComponent<AnimationController>();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("root tag ------> " + collision.transform.root.tag);
+        Debug.Log("tag ------> " + collision.gameObject.tag);
+        if (collision.gameObject.CompareTag("platform"))
+        {
+            collision.gameObject.GetComponent<PlatformMovementController>().dontMove = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("platform"))
+        {
+            collision.gameObject.GetComponent<PlatformMovementController>().dontMove = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         bool wasGrounded = m_Grounded;
@@ -97,7 +115,6 @@ public class CharacterController2D : MonoBehaviour
             // Add a vertical force to the player.
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-            Debug.Log("Jump plz");
             animationController.SetIsJumping(true);
         }
     }
@@ -116,13 +133,14 @@ public class CharacterController2D : MonoBehaviour
 
     public bool IsPlayerTouchingGround()
     {
-        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_GroundCheck.position.x - k_PlayerWidthRadius, m_GroundCheck.position.y - k_AreaCheckWidth),
-                                                          new Vector2(m_GroundCheck.position.x + k_PlayerWidthRadius, m_GroundCheck.position.y + k_AreaCheckWidth),
-                                                          m_WhatIsGround);
+        Collider2D[] colliders = new Collider2D[16];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(m_WhatIsGround);
+        m_GroundCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i] == null) return false;
+            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
             {
                 return true;
             }
@@ -131,13 +149,14 @@ public class CharacterController2D : MonoBehaviour
     }
     public bool IsPlayerTouchingCeiling()
     {
-        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_CeilingCheck.position.x - k_PlayerWidthRadius, m_CeilingCheck.position.y - k_AreaCheckWidth),
-                                                          new Vector2(m_CeilingCheck.position.x + k_PlayerWidthRadius, m_CeilingCheck.position.y + k_AreaCheckWidth),
-                                                          m_WhatIsGround);
+        Collider2D[] colliders = new Collider2D[16];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(m_WhatIsGround);
+        m_CeilingCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i] == null) return false;
+            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
             {
                 return true;
             }
@@ -146,13 +165,14 @@ public class CharacterController2D : MonoBehaviour
     }
     public bool IsPlayerTouchingLeft()
     {
-        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_LeftCheck.position.x - k_AreaCheckWidth, m_LeftCheck.position.y - k_PlayerHeightRadius),
-                                                          new Vector2(m_LeftCheck.position.x + k_AreaCheckWidth, m_LeftCheck.position.y + k_PlayerHeightRadius),
-                                                          m_WhatIsGround);
+        Collider2D[] colliders = new Collider2D[16];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(m_WhatIsGround);
+        m_LeftCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i] == null) return false;
+            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
             {
                 return true;
             }
@@ -161,58 +181,46 @@ public class CharacterController2D : MonoBehaviour
     }
     public bool IsPlayerTouchingRight()
     {
-        // The player is grounded if a areacast to the groundcheck position hits anything designated as ground
-        Collider2D[] colliders = Physics2D.OverlapAreaAll(new Vector2(m_RightCheck.position.x - k_AreaCheckWidth, m_RightCheck.position.y - k_PlayerHeightRadius),
-                                                          new Vector2(m_RightCheck.position.x + k_AreaCheckWidth, m_RightCheck.position.y + k_PlayerHeightRadius),
-                                                          m_WhatIsGround);
+        Collider2D[] colliders = new Collider2D[16];
+        ContactFilter2D filter = new ContactFilter2D();
+        filter.SetLayerMask(m_WhatIsGround);
+        m_RightCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
         for (int i = 0; i < colliders.Length; i++)
         {
-            if (colliders[i].gameObject != gameObject)
+            if (colliders[i] == null) return false;
+            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
             {
                 return true;
             }
         }
         return false;
     }
-    public bool IsPositionTouchingAbove(Vector2 pos)
+
+    private bool IsColliderTouchingAbove(Collider2D col)
     {
-        Rect rect = new Rect(m_CeilingCheck.position.x - k_PlayerWidthRadius,
-                             m_CeilingCheck.position.y - k_AreaCheckWidth,
-                             m_CeilingCheck.position.x + k_PlayerWidthRadius,
-                             m_CeilingCheck.position.y + k_AreaCheckWidth);
-        return rect.Contains(pos);
+        return m_CeilingCheck.GetComponent<BoxCollider2D>().IsTouching(col);
     }
-    public bool IsPositionTouchingBelow(Vector2 pos)
+    private bool IsColliderTouchingBelow(Collider2D col)
     {
-        Rect rect = new Rect(m_GroundCheck.position.x - k_PlayerWidthRadius,
-                             m_GroundCheck.position.y - k_AreaCheckWidth,
-                             m_GroundCheck.position.x + k_PlayerWidthRadius,
-                             m_GroundCheck.position.y + k_AreaCheckWidth);
-        return rect.Contains(pos);
+        return m_GroundCheck.GetComponent<BoxCollider2D>().IsTouching(col);
     }
-    public bool IsPositionTouchingLeft(Vector2 pos)
+    private bool IsColliderTouchingLeft(Collider2D col)
     {
-        Rect rect = new Rect(m_LeftCheck.position.x - k_AreaCheckWidth,
-                             m_LeftCheck.position.y - k_PlayerHeightRadius,
-                             m_LeftCheck.position.x + k_AreaCheckWidth,
-                             m_LeftCheck.position.y + k_PlayerHeightRadius);
-        return rect.Contains(pos);
+        return m_LeftCheck.GetComponent<BoxCollider2D>().IsTouching(col);
     }
-    public bool IsPositionTouchingRight(Vector2 pos)
+    private bool IsColliderTouchingRight(Collider2D col)
     {
-        Rect rect = new Rect(m_RightCheck.position.x - k_AreaCheckWidth,
-                             m_RightCheck.position.y - k_PlayerHeightRadius,
-                             m_RightCheck.position.x + k_AreaCheckWidth,
-                             m_RightCheck.position.y + k_PlayerHeightRadius);
-        return rect.Contains(pos);
+        return m_RightCheck.GetComponent<BoxCollider2D>().IsTouching(col);
     }
 
-    public bool IsPlayerSquished(Vector2 collisionPos)
+    public bool IsPlayerSquished(GameObject collisionObject, Vector3 moveAmount)
     {
-        if      (IsPositionTouchingAbove(collisionPos) && IsPlayerTouchingGround())  return true;
-        else if (IsPositionTouchingBelow(collisionPos) && IsPlayerTouchingCeiling()) return true;
-        else if (IsPositionTouchingLeft(collisionPos)  && IsPlayerTouchingRight())   return true;
-        else if (IsPositionTouchingRight(collisionPos) && IsPlayerTouchingLeft())    return true;
+        Vector3 posOnTile = collisionObject.GetComponent<BoxCollider2D>().bounds.ClosestPoint(transform.position);
+        Vector3 collisionPos = posOnTile + moveAmount;
+        if      (IsColliderTouchingAbove(collisionObject.GetComponent<BoxCollider2D>()) && m_Grounded)  return true;
+        else if (IsColliderTouchingBelow(collisionObject.GetComponent<BoxCollider2D>()) && m_TouchingCeiling) return true;
+        else if (IsColliderTouchingLeft(collisionObject.GetComponent<BoxCollider2D>())  && m_TouchingRight)   return true;
+        else if (IsColliderTouchingRight(collisionObject.GetComponent<BoxCollider2D>()) && m_TouchingLeft)    return true;
         return false;
     }
 }
