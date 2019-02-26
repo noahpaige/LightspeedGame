@@ -36,7 +36,6 @@ public class PlatformMovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //rb.MovePosition(Ease(CalcTranslation(player.transform.position)));
         rb.MovePosition(Ease(CalcX(player.transform.position)));
         prevPercentage = Mathf.Max(prevPercentage, 0f);
     }
@@ -49,7 +48,7 @@ public class PlatformMovementController : MonoBehaviour
         {
             if (playerWasInWindow)
             {
-                //percentage = calc percentage player has moved inside window based on current player and previous player positions
+                //percentage = percentage player has moved inside window based on current player and previous player positions
                 float playerMoveDist = playerPos.x - prevPlayerPos.x;
                 float percentage = playerMoveDist / Mathf.Abs(startMovingPoint - endMovingPoint);
                 percentage += prevPercentage;
@@ -85,6 +84,8 @@ public class PlatformMovementController : MonoBehaviour
             {
                 //TODO:
                 //  - check if player is being squished
+                Vector3 closestChild = GetClosestChildToPosition(col.GetContacts())
+                if(IsPlatformSquishingPlayer(col.getcon, col.gameObject.GetComponent<CharacterController2D>()))
                 prevPercentage = savedPrevPercentage;
                 UpdateFromAndTo(prevPercentage);
                 break;
@@ -163,13 +164,13 @@ public class PlatformMovementController : MonoBehaviour
         return false;
     }
 
-    private Vector3 GetClosestChildToPosition(Vector3 pos)
+    private Transform GetClosestChildToPosition(Vector3 pos)
     {
-        Vector3 closest = transform.GetChild(0).position;
+        Transform closest = transform.GetChild(0);
         foreach(Transform child in transform)
         {
-            if (Vector3.Distance(closest, pos) > Vector3.Distance(child.position, pos))
-                closest = child.position;
+            if (Vector3.Distance(closest.position, pos) > Vector3.Distance(child.position, pos))
+                closest = child;
         }
         return closest;
     }

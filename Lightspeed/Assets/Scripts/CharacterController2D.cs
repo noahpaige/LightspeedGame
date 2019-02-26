@@ -18,6 +18,9 @@ public class CharacterController2D : MonoBehaviour
     const float k_PlayerHeightRadius = 1.081f;                                  // Radius of the overlap area for player height
     const float k_AreaCheckWidth = 0.05f;
     private bool m_Grounded;                                                    // Whether or not the player is grounded.
+    private bool m_TouchingCeiling;                                             // Whether or not the player is touching something above them
+    private bool m_TouchingLeft;                                                // Whether or not the player is touching something to the left of them
+    private bool m_TouchingRight;                                               // Whether or not the player is touching something to the right of them
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;                                          // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
@@ -54,6 +57,9 @@ public class CharacterController2D : MonoBehaviour
     {
         bool wasGrounded = m_Grounded;
         m_Grounded = IsPlayerTouchingGround();
+        m_TouchingCeiling = IsPlayerTouchingCeiling();
+        m_TouchingLeft = IsPlayerTouchingLeft();
+        m_TouchingRight = IsPlayerTouchingRight();
 
         if(m_Grounded && !wasGrounded) OnLandEvent.Invoke();
 
@@ -199,5 +205,14 @@ public class CharacterController2D : MonoBehaviour
                              m_RightCheck.position.x + k_AreaCheckWidth,
                              m_RightCheck.position.y + k_PlayerHeightRadius);
         return rect.Contains(pos);
+    }
+
+    public bool IsPlayerSquished(Vector2 collisionPos)
+    {
+        if      (IsPositionTouchingAbove(collisionPos) && IsPlayerTouchingGround())  return true;
+        else if (IsPositionTouchingBelow(collisionPos) && IsPlayerTouchingCeiling()) return true;
+        else if (IsPositionTouchingLeft(collisionPos)  && IsPlayerTouchingRight())   return true;
+        else if (IsPositionTouchingRight(collisionPos) && IsPlayerTouchingLeft())    return true;
+        return false;
     }
 }

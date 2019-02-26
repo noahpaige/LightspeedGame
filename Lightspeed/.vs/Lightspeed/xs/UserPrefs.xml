@@ -1,14 +1,12 @@
 ﻿<Properties StartupConfiguration="{3FC44C6B-2536-7617-74AD-9DE5BDC4E21C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LightMovementController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlatformMovementController.cs">
     <Files>
       <File FileName="Assets/Scripts/WinCheckController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GameController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/CharacterController2D.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/ColorLerpController.cs" Line="20" Column="10" />
       <File FileName="Assets/Scripts/ObjectMovementController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/PlatformMovementController.cs" Line="11" Column="15" />
-      <File FileName="Assets/Scripts/PlatformMovementController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/LightMovementController1.cs" Line="5" Column="19" />
+      <File FileName="Assets/Scripts/PlatformMovementController.cs" Line="88" Column="84" />
       <File FileName="Assets/Scripts/LightMovementController.cs" Line="97" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
