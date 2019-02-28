@@ -23,8 +23,8 @@ public class ColorLerpController : MonoBehaviour {
     void SetColor(SpriteRenderer rend, float pos)
     {
         bool flip = ((int)pos / (int)step) % 2 == 1;
-        if (flip) Debug.Log("Flippd");
-        else Debug.Log("NOT");
+        //if (flip) Debug.Log("Flippd");
+        //else Debug.Log("NOT");
         if (flip)
             rend.color = Color.Lerp(Color2, Color1, Mathf.Abs((pos % step) / step));
         else

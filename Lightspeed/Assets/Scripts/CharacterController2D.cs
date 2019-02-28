@@ -53,24 +53,6 @@ public class CharacterController2D : MonoBehaviour
         animationController = GetComponent<AnimationController>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("root tag ------> " + collision.transform.root.tag);
-        Debug.Log("tag ------> " + collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("platform"))
-        {
-            collision.gameObject.GetComponent<PlatformMovementController>().dontMove = true;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("platform"))
-        {
-            collision.gameObject.GetComponent<PlatformMovementController>().dontMove = false;
-        }
-    }
-
     private void FixedUpdate()
     {
         bool wasGrounded = m_Grounded;
@@ -82,6 +64,10 @@ public class CharacterController2D : MonoBehaviour
         if(m_Grounded && !wasGrounded) OnLandEvent.Invoke();
 
         animationController.SetIsJumping(!m_Grounded);
+
+        //Debug.Log("Grounded: " + m_Grounded);
+        //Debug.Log("is Player Touching Left: " + m_TouchingLeft);
+        //Debug.Log("is Player Touching Right: " + m_TouchingRight);
     }
 
 
@@ -133,94 +119,107 @@ public class CharacterController2D : MonoBehaviour
 
     public bool IsPlayerTouchingGround()
     {
-        Collider2D[] colliders = new Collider2D[16];
+        Collider2D[] colliders = new Collider2D[1];
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(m_WhatIsGround);
         m_GroundCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i] == null) return false;
-            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
+        if (colliders[0] == null) return false;
+
+        return true;
     }
     public bool IsPlayerTouchingCeiling()
     {
-        Collider2D[] colliders = new Collider2D[16];
+        Collider2D[] colliders = new Collider2D[1];
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(m_WhatIsGround);
         m_CeilingCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i] == null) return false;
-            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
+        if (colliders[0] == null) return false;
+
+        return true;
     }
     public bool IsPlayerTouchingLeft()
     {
-        Collider2D[] colliders = new Collider2D[16];
+        Collider2D[] colliders = new Collider2D[1];
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(m_WhatIsGround);
         m_LeftCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            if (colliders[i] == null) return false;
-            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
-            {
-                return true;
-            }
-        }
-        return false;
+        if (colliders[0] == null) return false;
+
+        return true;
     }
     public bool IsPlayerTouchingRight()
     {
-        Collider2D[] colliders = new Collider2D[16];
+        Collider2D[] colliders = new Collider2D[1];
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(m_WhatIsGround);
         m_RightCheck.GetComponent<BoxCollider2D>().OverlapCollider(filter, colliders);
-        for (int i = 0; i < colliders.Length; i++)
+        if (colliders[0] == null) return false;
+
+        return true;
+    }
+
+    private bool IsColliderTouchingAbove(Collider2D[] cols)
+    {
+        foreach (Collider2D col in cols)
         {
-            if (colliders[i] == null) return false;
-            if (!colliders[i].gameObject.CompareTag("checkObject") && colliders[i].gameObject != gameObject)
-            {
-                return true;
-            }
+            Debug.Log("collider's object name: " + col.gameObject.name);
+            if (col == m_CeilingCheck) return true;
         }
         return false;
     }
-
-    private bool IsColliderTouchingAbove(Collider2D col)
+    private bool IsColliderTouchingBelow(Collider2D[] cols)
     {
-        return m_CeilingCheck.GetComponent<BoxCollider2D>().IsTouching(col);
-    }
-    private bool IsColliderTouchingBelow(Collider2D col)
-    {
-        return m_GroundCheck.GetComponent<BoxCollider2D>().IsTouching(col);
-    }
-    private bool IsColliderTouchingLeft(Collider2D col)
-    {
-        return m_LeftCheck.GetComponent<BoxCollider2D>().IsTouching(col);
-    }
-    private bool IsColliderTouchingRight(Collider2D col)
-    {
-        return m_RightCheck.GetComponent<BoxCollider2D>().IsTouching(col);
-    }
-
-    public bool IsPlayerSquished(GameObject collisionObject, Vector3 moveAmount)
-    {
-        Vector3 posOnTile = collisionObject.GetComponent<BoxCollider2D>().bounds.ClosestPoint(transform.position);
-        Vector3 collisionPos = posOnTile + moveAmount;
-        if      (IsColliderTouchingAbove(collisionObject.GetComponent<BoxCollider2D>()) && m_Grounded)  return true;
-        else if (IsColliderTouchingBelow(collisionObject.GetComponent<BoxCollider2D>()) && m_TouchingCeiling) return true;
-        else if (IsColliderTouchingLeft(collisionObject.GetComponent<BoxCollider2D>())  && m_TouchingRight)   return true;
-        else if (IsColliderTouchingRight(collisionObject.GetComponent<BoxCollider2D>()) && m_TouchingLeft)    return true;
+        foreach (Collider2D col in cols)
+        {
+            if (col == m_GroundCheck) return true;
+        }
         return false;
     }
+    private bool IsColliderTouchingLeft(Collider2D[] cols)
+    {
+        foreach (Collider2D col in cols)
+        {
+            if (col == m_LeftCheck) return true;
+        }
+        return false;
+    }
+    private bool IsColliderTouchingRight(Collider2D[] cols)
+    {
+        foreach(Collider2D col in cols)
+        {
+            if (col == m_RightCheck) return true;
+         }
+        return false;
+    }
+
+    public bool IsPlayerSquished(Collider2D[] colliders, Vector3 moveAmount)
+    {
+        //Bounds bounds = collisionObject.GetComponent<BoxCollider2D>().bounds;
+        //Debug.Log(collisionObject.name + " bounds : " + bounds.ToString());
+        //Collider2D[] colliders = Physics2D.OverlapAreaAll(bounds.max + moveAmount, bounds.min + moveAmount, LayerMask.NameToLayer("Player"));
+        if (IsColliderTouchingAbove(colliders) && m_Grounded) return true;
+        if (IsColliderTouchingBelow(colliders) && m_TouchingCeiling) return true;
+        if (IsColliderTouchingLeft(colliders) && m_TouchingRight) return true;
+        if (IsColliderTouchingRight(colliders) && m_TouchingLeft) return true;
+        return false;
+    }
+
+    public bool IsPlayerSquished2(GameObject collider)
+    {
+        if (collider.gameObject == m_CeilingCheck.gameObject && m_Grounded)        return true;
+        if (collider.gameObject == m_GroundCheck.gameObject  && m_TouchingCeiling) return true;
+        if (collider.gameObject == m_LeftCheck.gameObject    && m_TouchingRight)   return true;
+        if (collider.gameObject == m_RightCheck.gameObject   && m_TouchingLeft)    return true;
+        return false;
+    }
+
+    public void SetIsTouchingGround (bool b) { m_Grounded        = b; }
+    public void SetIsTouchingCeiling(bool b) { m_TouchingCeiling = b; }
+    public void SetIsTouchingLeft   (bool b) { m_TouchingLeft    = b; }
+    public void SetIsTouchingRight  (bool b) { m_Grounded        = b; }
+
+    public Transform GetGroundCheck()  { return m_GroundCheck ; }
+    public Transform GetCeilingCheck() { return m_CeilingCheck; }
+    public Transform GetLeftCheck()    { return m_LeftCheck   ; }
+    public Transform GetRightCheck()   { return m_RightCheck  ; }
 }

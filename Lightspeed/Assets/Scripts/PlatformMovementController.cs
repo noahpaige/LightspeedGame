@@ -16,7 +16,6 @@ public class PlatformMovementController : MonoBehaviour
     private int toPoint;
     public float prevPercentage = 0f; // the % representing where the player is between startMovingPoint and endMovingPoint
 
-    public bool dontMove = false;
     private bool playerWasInWindow = false;
     private Vector2 prevPlayerPos = Vector2.zero;
 
@@ -36,7 +35,7 @@ public class PlatformMovementController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!dontMove) rb.MovePosition(Ease(CalcX(player.transform.position)));
+        rb.MovePosition(Ease(CalcX(player.transform.position)));
         prevPercentage = Mathf.Max(prevPercentage, 0f);
     }
 
@@ -69,32 +68,26 @@ public class PlatformMovementController : MonoBehaviour
         float adjustedPercentage = (percentage - (fromPoint / (points.Length - 1))) * (points.Length - 1) - fromPoint; // percentage between fromPoint and toPoint
         Vector2 moveTowards;
         moveTowards = Vector2.Lerp(points[fromPoint], points[toPoint], adjustedPercentage);
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(moveTowards, new Vector2(2f * tileWidth + 0.05f, tileWidth + 0.05f), transform.rotation.z);
-        //Debug.Log("Collider " + transform.name + " length: " + colliders.Length);
-
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(moveTowards, new Vector2(2f * tileWidth, tileWidth), transform.rotation.z);
         float savedPrevPercentage = prevPercentage;
         foreach(Collider2D col in colliders)
         {
-            if (col.CompareTag("collidable") && col.gameObject.transform.parent.parent.gameObject != this.gameObject)
+            if (col.CompareTag("collidable") && col.gameObject.transform.parent.gameObject != this.gameObject)
             {
                 prevPercentage = savedPrevPercentage;
                 UpdateFromAndTo(prevPercentage);
                 return moveTowards;
             }
             /*
-            else if (col.CompareTag("Player"))
+            else if (col.CompareTag("checkObject"))
             {
                 Debug.Log("Platform Collided with player");
-                Vector3 moveAmount = transform.position - new Vector3(moveTowards.x, moveTowards.y, transform.position.z);
-                foreach(Transform child in transform)
+                if (col.transform.parent.GetComponent<CharacterController2D>().IsPlayerSquished2(col.gameObject))
                 {
-                    if (col.GetComponent<CharacterController2D>().IsPlayerSquished(child.gameObject, moveAmount))
-                    {
-                        Debug.Log("PLAYER SQUISHED");
-                        prevPercentage = savedPrevPercentage;
-                        UpdateFromAndTo(prevPercentage);
-                        return moveTowards;
-                    }
+                    Debug.Log("PLAYER SQUISHED");
+                    prevPercentage = savedPrevPercentage;
+                    UpdateFromAndTo(prevPercentage);
+                    return moveTowards;
                 }
                 prevPercentage = percentage;
             }
