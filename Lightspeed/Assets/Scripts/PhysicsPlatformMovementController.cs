@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class PhysicsPlatformMovementController : MonoBehaviour {
 
     // Don't change these. They are used by DropdownEditor.cs.
@@ -15,16 +16,12 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
     public float startMovingPoint;
     public float endMovingPoint;
     public GameObject player;
-    //[Range(0f, Mathf.Infinity)] public float speedFactor = 100f;
     public float maxSpeed = 5f;
     public float drag = 0.5f;
 
     private Rigidbody2D rb;
 
     private Vector2 prevPlayerPosition;
-    //private bool playerWasInWindow = false;
-    //private float windowDist;
-    //private float travelDist;
     private float speedFactor;
 
     //private static readonly float EPSILON = 0.01f;
@@ -32,25 +29,23 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.drag = drag;
+        //rb.drag = drag;
 
         transform.position = fromPoint;
-        //windowDist = Mathf.Abs(endMovingPoint - startMovingPoint);
-        //travelDist = Vector2.Distance(fromPoint, toPoint);
         speedFactor = Mathf.Max(500f, rb.mass);
     }
 
     void FixedUpdate()
     {
-        MovePlatform(new Vector2(player.transform.position.x, player.transform.position.y));
+        MovePlatform(player.GetComponent<Rigidbody2D>().position);
         ScaleSpeed();
     }
 
     private void MovePlatform(Vector2 playerPos)
     {
         float percentageWithinWindow;
-        if(followX) percentageWithinWindow = (playerPos.x - startMovingPoint) / endMovingPoint;
-        else        percentageWithinWindow = (playerPos.y - startMovingPoint) / endMovingPoint;
+        if(followX) percentageWithinWindow = (playerPos.x - startMovingPoint) / (endMovingPoint - startMovingPoint);
+        else        percentageWithinWindow = (playerPos.y - startMovingPoint) / (endMovingPoint - startMovingPoint);
 
         Vector2 targetPoint = Vector2.Lerp(fromPoint, toPoint, percentageWithinWindow);
 
