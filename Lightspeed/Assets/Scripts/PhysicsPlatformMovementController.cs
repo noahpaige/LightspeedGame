@@ -15,19 +15,19 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
     public float startMovingPoint;
     public float endMovingPoint;
     public GameObject player;
-    [Range(0f, Mathf.Infinity)] public float speedFactor = 100f;
+    //[Range(0f, Mathf.Infinity)] public float speedFactor = 100f;
     public float maxSpeed = 5f;
     public float drag = 0.5f;
 
     private Rigidbody2D rb;
 
     private Vector2 prevPlayerPosition;
-    private bool playerWasInWindow = false;
-    private float windowDist;
-    private float travelDist;
+    //private bool playerWasInWindow = false;
+    //private float windowDist;
+    //private float travelDist;
+    private float speedFactor;
 
-
-    private static readonly float EPSILON = 0.01f;
+    //private static readonly float EPSILON = 0.01f;
 
     void Start()
     {
@@ -35,30 +35,28 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
         rb.drag = drag;
 
         transform.position = fromPoint;
-        windowDist = Mathf.Abs(endMovingPoint - startMovingPoint);
-        travelDist = Vector2.Distance(fromPoint, toPoint);
+        //windowDist = Mathf.Abs(endMovingPoint - startMovingPoint);
+        //travelDist = Vector2.Distance(fromPoint, toPoint);
+        speedFactor = Mathf.Max(500f, rb.mass);
     }
 
     void FixedUpdate()
     {
-        //remember to cap speed
-        //if player is in window
-        // if player was in window
-        //add force relative to previous position
-        // else add some force idk lol
-
-        if (followX) MovePlatformFollowX2(new Vector2(player.transform.position.x, player.transform.position.y));
-
+        MovePlatform(new Vector2(player.transform.position.x, player.transform.position.y));
+        ScaleSpeed();
     }
 
-    private void MovePlatformFollowX2(Vector2 playerPos)
+    private void MovePlatform(Vector2 playerPos)
     {
-        float percentageWithinWindow = (playerPos.x - startMovingPoint) / endMovingPoint;
+        float percentageWithinWindow;
+        if(followX) percentageWithinWindow = (playerPos.x - startMovingPoint) / endMovingPoint;
+        else        percentageWithinWindow = (playerPos.y - startMovingPoint) / endMovingPoint;
+
         Vector2 targetPoint = Vector2.Lerp(fromPoint, toPoint, percentageWithinWindow);
 
         Vector2 fromPlatToTarget = targetPoint - rb.position;
 
-        rb.AddForce(fromPlatToTarget * rb.mass);
+        rb.AddForce(fromPlatToTarget * speedFactor);
 
         if (rb.velocity.magnitude > maxSpeed)
         {
@@ -66,33 +64,14 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
         }
     }
 
-    private void MovePlatformFollowX(Vector2 playerPos)
+    private void ScaleSpeed()
     {
-        if (playerPos.x >= startMovingPoint && playerPos.x <= endMovingPoint)
-        {
-            if (playerWasInWindow)
-            {
-                float frameMovement = playerPos.x - prevPlayerPosition.x;
-                if (System.Math.Abs(frameMovement) < EPSILON) return;
-                if(!IsPlatformMovingWithPlayer(frameMovement))
-                {
-                    Debug.Log("Not moving with player");
-                    //rb.velocity = Vector2.zero;
-                }
-                AddForceCapped(frameMovement);
-            }
-            playerWasInWindow = true;
-            prevPlayerPosition = playerPos;
-        }
-        else playerWasInWindow = false;
-    }
+        Vector2 dir = rb.velocity.normalized;
+        float halfDistFromTo = Vector2.Distance(fromPoint, toPoint) / 2f;
+        float curDist = Mathf.Min(Vector2.Distance(fromPoint, rb.position), Vector2.Distance(toPoint, rb.position));
+        float scaledSpeed = curDist / halfDistFromTo;
 
-    bool IsPlatformMovingWithPlayer(float frameMovement)
-    {
-        bool platformMovingTowardsToPoint = (rb.velocity.normalized == (toPoint - fromPoint).normalized);
-
-        if (platformMovingTowardsToPoint) return frameMovement > 0;
-        else                              return frameMovement <= 0;
+        rb.velocity = dir * Mathf.Min(scaledSpeed, rb.velocity.magnitude);
     }
 
     private void OnDrawGizmosSelected()
@@ -105,16 +84,4 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(new Vector3(toPoint.x, toPoint.y, -1f), gizWidth);
     }
-
-    private void AddForceCapped(float frameMovement)
-    {
-        Vector2 platformVelocity = rb.velocity;
-        Vector2 addForce = (toPoint - fromPoint).normalized * frameMovement * speedFactor * Time.deltaTime;
-        rb.AddForce(addForce);
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            rb.velocity = rb.velocity.normalized * maxSpeed;
-        }
-    }   
-
 }
