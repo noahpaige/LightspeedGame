@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{3FC44C6B-2536-7617-74AD-9DE5BDC4E21C}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PhysicsPlatformMovementController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/WinCheckController.cs">
     <Files>
       <File FileName="Assets/Scripts/CharacterController2D.cs" Line="209" Column="82" />
-      <File FileName="Assets/Scripts/PhysicsPlatformMovementController.cs" Line="61" Column="47" />
-      <File FileName="Assets/Scripts/DropdownEditor.cs" Line="7" Column="56" />
+      <File FileName="Assets/Scripts/PhysicsPlatformMovementController.cs" Line="61" Column="1" />
       <File FileName="Assets/Scripts/PlatformMovementController.cs" Line="46" Column="77" />
+      <File FileName="Assets/Scripts/ObjectMovementController.cs" Line="31" Column="1" />
+      <File FileName="Assets/Scripts/WinCheckController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
