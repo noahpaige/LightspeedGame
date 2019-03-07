@@ -7,47 +7,72 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public static GameController instance;
-
-    private string[] levels = { "level1", "level2" };
-
-    [HideInInspector] public int currentLevel;
-
     public GameObject Player;
+    [HideInInspector] public bool curLevelIsFinished = false;
+
+    private static string[] levels = { "level1", "level2" };
+    private SaveData data;
+    private float timer = 0f;
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
+        if      (instance == null) { instance = this; }
+        else if (instance != this) { Destroy(gameObject); }
+
         DontDestroyOnLoad(transform.gameObject);
-        //levels = new string[] { "MainMenu", "level1", "level2" };
-        currentLevel = 0;
-        Debug.Log("LEVELS: " + levels.Length);
-        foreach (var l in levels)
+
+        data = SaveSystem.LoadPlayer();
+        if(data == null)
         {
-            Debug.Log(l);
-        }
-        
+            Debug.Log("Creating new save data.");
+            data = SaveSystem.CreateNewSaveData();
+        }        
     }
 
-	public void PlayerWon()
+    private void Update()
     {
+        if (Player == null) Player = GameObject.Find("Player");
+        if (!curLevelIsFinished) timer += Time.deltaTime;
+    }
+
+    public void PlayerWon()
+    {
+        curLevelIsFinished = true;
         Player.SetActive(false);
+        if (data.levelTimes[data.currentLevel] > timer) data.UpdateTimeAt(timer, data.currentLevel);
+        timer = 0;
+        Save();
     }
 
     public void GoToNextScene()
     {
-        currentLevel = (currentLevel + 1) % levels.Length;
-        SceneManager.LoadScene(levels[currentLevel]);
+        curLevelIsFinished = false;
+        data.currentLevel = (data.currentLevel + 1) % levels.Length;
+        data.maxLevelReached = Mathf.Max(data.maxLevelReached, data.currentLevel);
+        SceneManager.LoadScene(levels[data.currentLevel]);
+        Player = GameObject.Find("Player");
     }
 
     public void PlayCurrentLevel()
     {
-        SceneManager.LoadScene(levels[currentLevel]);
+        curLevelIsFinished = false;
+        SceneManager.LoadScene(levels[data.currentLevel]);
+        Player = GameObject.Find("Player");
     }
+
+    public void Save()
+    {
+        Debug.Log("Saving Game...");
+        Debug.Log("         Current Level: " + levels[data.currentLevel]);
+        Debug.Log("         Max     Level: " + levels[data.maxLevelReached]);
+        for (int i = 0; i < levels.Length; i++)
+        {
+            Debug.Log("                 Level Time: " + data.levelTimes[i]);
+        }
+        Debug.Log("... Game Saved");
+        
+        SaveSystem.SavePlayerData(data);
+    }
+
+    public int GetNumLevels() { return levels.Length; }
 }

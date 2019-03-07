@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PauseMenuController : MonoBehaviour {
+public class MenuController : MonoBehaviour {
 
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
 
+    public GameObject[] subMenus;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (GameController.instance.curLevelIsFinished) return;
             if (GameIsPaused)
             {
                 ResumeGame();
@@ -26,7 +29,7 @@ public class PauseMenuController : MonoBehaviour {
 
     public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);
+        foreach (GameObject menu in subMenus) { menu.SetActive(false); }
         Time.timeScale = 1f;
         GameIsPaused = false;
     }

@@ -14,4 +14,9 @@ public class OnCollisionEvent : MonoBehaviour {
             e.Invoke();
         }
     }
+
+    public void CallPlayerWon()
+    {
+        GameController.instance.PlayerWon();
+    }
 }
