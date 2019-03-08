@@ -68,6 +68,10 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
 
         rb.velocity = dir * Mathf.Min(scaledSpeed, rb.velocity.magnitude);
     }
+    public void ResetPosition()
+    {
+        rb.position = fromPoint;
+    }
 
     private void OnDrawGizmosSelected()
     {
