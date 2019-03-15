@@ -18,9 +18,9 @@ TagManager:
   - 
   - Player
   - Ground
-  - 
-  - 
-  - 
+  - LightSources
+  - LightObstacles
+  - AmbientLight
   - 
   - 
   - 
@@ -41,8 +41,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: Background1
+    uniqueID: 1038151325
+    locked: 0
+  - name: Background2
+    uniqueID: 22580831
+    locked: 0
+  - name: Background3
+    uniqueID: 2460606773
     locked: 0
   - name: Midground
     uniqueID: 1247604199
@@ -52,4 +58,7 @@ TagManager:
     locked: 0
   - name: Light
     uniqueID: 2965330019
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
