@@ -4944,7 +4944,6 @@ GameObject:
   - component: {fileID: 95269508797585886}
   - component: {fileID: 114361117237316610}
   - component: {fileID: 60354784019937700}
-  - component: {fileID: 1009030707868526784}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -5093,6 +5092,7 @@ MonoBehaviour:
   m_CeilingCheck: {fileID: 4888990119886518}
   m_LeftCheck: {fileID: 4938165518358564}
   m_RightCheck: {fileID: 4599289315612434}
+  maxVelocity: 20
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5154,7 +5154,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1845338177737864}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 97299bf6da2909947a8d74ff072a7bcc, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -5185,20 +5185,6 @@ PolygonCollider2D:
       - {x: -0.39784712, y: -1.0795667}
       - {x: -0.37885737, y: -1.0816939}
       - {x: 0.37975243, y: -1.0802283}
---- !u!114 &1009030707868526784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845338177737864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c17df864137805e439e51fb63bd582a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  lerpSpeed: 0.5
 --- !u!1 &1926185481241132
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,6 +5252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 736053227707699570}
   - component: {fileID: 3832656088826622457}
+  - component: {fileID: 787466945}
   m_Layer: 0
   m_Name: LightContainer
   m_TagString: Untagged
@@ -5281,7 +5268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8126211586783112685}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 2.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4991591220638548}
@@ -5302,4 +5289,19 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.5
+--- !u!114 &787466945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8126211586783112685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17df864137805e439e51fb63bd582a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 3832656088826622457}
+  collectedSize: 0.5
+  playerTransform: {fileID: 4991591220638548}

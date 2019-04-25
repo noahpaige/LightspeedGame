@@ -39,11 +39,13 @@ public static class SaveSystem {
     public static SaveData CreateNewSaveData()
     {
         float[] times = new float[GameController.instance.GetNumLevels()];
+        int[] lightsCollectedPerLevel = new int[times.Length];
         for (int i = 0; i < times.Length; i++)
         {
             times[i] = -1;
+            lightsCollectedPerLevel[i] = 0;
         }
-        return new SaveData(0,0, times);
+        return new SaveData(0,0, times, lightsCollectedPerLevel);
     }
 	
 }

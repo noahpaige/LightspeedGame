@@ -39,7 +39,8 @@ public class GameController : MonoBehaviour {
     {
         curLevelIsFinished = true;
         Player.SetActive(false);
-        if (data.levelTimes[data.currentLevel] > timer) data.UpdateTimeAt(timer, data.currentLevel);
+        int lightsCollectedPlaceholder = 0; //TODO
+        if (data.levelTimes[data.currentLevel] > timer) data.UpdateDataAt(timer, lightsCollectedPlaceholder, data.currentLevel);
         timer = 0;
         Save();
     }

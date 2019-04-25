@@ -13,6 +13,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] private Transform m_LeftCheck;                             // A position marking where to check is touching something to their left
     [SerializeField] private Transform m_RightCheck;                            // A position marking where to check is touching something to their right
+    [Range(0, 20f)] [SerializeField] private float maxVelocity;
 
     const float k_PlayerWidthRadius = .2f;                                      // Radius of the overlap area for player width
     const float k_PlayerHeightRadius = 1.081f;                                  // Radius of the overlap area for player height
@@ -79,6 +80,7 @@ public class CharacterController2D : MonoBehaviour
         {
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+            if (targetVelocity.magnitude > maxVelocity) targetVelocity = targetVelocity.normalized * maxVelocity;
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 

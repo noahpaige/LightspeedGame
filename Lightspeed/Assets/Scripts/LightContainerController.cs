@@ -39,7 +39,7 @@ public class LightContainerController : MonoBehaviour
                 }
                 if (light.transform.localScale.x > collectedSize)
                 {
-                    GameObject rays = light.GetComponent<LightColliderController>().rays;
+                    GameObject rays = light.GetComponent<LightController>().rays;
                     rays.transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(collectedSize, collectedSize, collectedSize), time);
                 }
             }
@@ -51,8 +51,7 @@ public class LightContainerController : MonoBehaviour
     public void AddLight(GameObject addme)
     {
         lights.Add(addme);
-        Debug.Log("COUNT " + lights.Count);
-        addme.transform.SetParent(transform.parent);
+        //addme.transform.SetParent(transform.parent);
         toPositions = getPositions(lights.Count, colRadius);
         lightsStillMoving = true;
         time = 0f;
@@ -60,7 +59,6 @@ public class LightContainerController : MonoBehaviour
         for (int i = 0; i < lights.Count; i++)
         {
             from[i] = lights[i].transform.position;
-            Debug.Log("ToPosition " + i + " " + toPositions[i]);
         }
         fromPositions = from;
     }
@@ -77,13 +75,23 @@ public class LightContainerController : MonoBehaviour
         }
 
         float radInterval = 2 * Mathf.PI / n;
-        
+        float oddOffset = Mathf.PI / n / 2 * (n % 2);
+
         for (int i = 0; i < n; i++)
         {
-            Vector3 point = new Vector3(radius * Mathf.Cos(i * radInterval), radius * Mathf.Sin(i * radInterval), 0f);
+            Vector3 point = new Vector3(radius * Mathf.Cos(i * radInterval + oddOffset), radius * Mathf.Sin(i * radInterval + oddOffset), 0f);
             point = point + col.transform.localPosition;
             positions[i] = point;
         }
         return positions;
+    }
+
+    public List<GameObject> GetLights()
+    {
+        return lights;
+    }
+    public void ClearLights()
+    {
+        lights.Clear();
     }
 }
