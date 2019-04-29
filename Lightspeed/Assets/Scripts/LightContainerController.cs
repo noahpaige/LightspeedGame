@@ -13,7 +13,7 @@ public class LightContainerController : MonoBehaviour
 
     private bool lightsStillMoving = false;
 
-    [Range(0f, 1f)] public float collectedSize = 0.5f;
+    [Range(0f, 1f)] public float collectedScaleFactor = 0.5f;
     public Transform playerTransform;
 
     // Start is called before the first frame update
@@ -26,26 +26,8 @@ public class LightContainerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool moved = false;
-        if(lightsStillMoving)
-        {
-            for (int i = 0; i < lights.Count; i++)
-            {
-                GameObject light = lights[i];
-                if(light.transform.position != toPositions[i])
-                {
-                    light.transform.position = Vector3.Lerp(fromPositions[i], toPositions[i] + playerTransform.position, time);
-                    moved = true;
-                }
-                if (light.transform.localScale.x > collectedSize)
-                {
-                    GameObject rays = light.GetComponent<LightController>().rays;
-                    rays.transform.localScale = Vector3.Lerp(Vector3.one, new Vector3(collectedSize, collectedSize, collectedSize), time);
-                }
-            }
-            time += Time.deltaTime;
-        }
-        if (!moved) lightsStillMoving = false;
+        bool lightsStillMoving = ArrangeLights();
+        if(!lightsStillMoving) FollowPlayer();
     }
 
     public void AddLight(GameObject addme)
@@ -82,8 +64,57 @@ public class LightContainerController : MonoBehaviour
             Vector3 point = new Vector3(radius * Mathf.Cos(i * radInterval + oddOffset), radius * Mathf.Sin(i * radInterval + oddOffset), 0f);
             point = point + col.transform.localPosition;
             positions[i] = point;
+            //Debug.Log("Point " + i + ": " + point);
         }
         return positions;
+    }
+
+    private bool ArrangeLights()
+    {
+        bool moved = false;
+        if (lightsStillMoving)
+        {
+            for (int i = 0; i < lights.Count; i++)
+            {
+                GameObject light = lights[i];
+                float scale = collectedScaleFactor + (1f - collectedScaleFactor) * (1f / Mathf.Pow(1.5f, lights.Count - 1.0f));
+                float modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
+                if (modifiedTime < 1f)
+                {
+                    //arrange lights
+                    light.transform.position = Vector3.Lerp(fromPositions[i], toPositions[i] + playerTransform.position, modifiedTime);
+                    moved = true;
+
+                    //reduce size of rays and trail particles
+                    GameObject rays = light.GetComponent<LightController>().rays;
+                    GameObject trails = light.GetComponent<LightController>().trails;
+                    Vector3 newScale = Vector3.Lerp(Vector3.one, new Vector3(scale, scale, scale), time);
+                    rays.transform.localScale = newScale;
+                    trails.transform.localScale = newScale;
+
+                    //reduce alpha
+                    ParticleSystem.MainModule settings = rays.GetComponent<ParticleSystem>().main;
+                    Color reducedAlpha = new Color(settings.startColor.color.r, settings.startColor.color.g, settings.startColor.color.b, scale);
+                    //settings.startColor = new ParticleSystem.MinMaxGradient(reducedAlpha);
+                    settings.startColor = reducedAlpha;
+                }
+            }
+            time += Time.deltaTime;
+        }
+        if (!moved)
+        {
+            lightsStillMoving = false;
+        }
+        return lightsStillMoving;
+    }
+
+    private void FollowPlayer()
+    {
+        for (int i = 0; i < lights.Count; i++)
+        {
+            Vector3 desiredPos = toPositions[i] + playerTransform.position;
+            lights[i].transform.position = Vector3.Lerp(lights[i].transform.position, desiredPos, lights[i].GetComponent<LightController>().moveSpeed / 2f);
+        }
     }
 
     public List<GameObject> GetLights()
