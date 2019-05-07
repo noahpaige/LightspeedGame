@@ -56,11 +56,11 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        bool wasGrounded = m_Grounded;
-        m_Grounded = IsPlayerTouchingGround();
+        bool wasGrounded  = m_Grounded;
+        m_Grounded        = IsPlayerTouchingGround();
         m_TouchingCeiling = IsPlayerTouchingCeiling();
-        m_TouchingLeft = IsPlayerTouchingLeft();
-        m_TouchingRight = IsPlayerTouchingRight();
+        m_TouchingLeft    = IsPlayerTouchingLeft();
+        m_TouchingRight   = IsPlayerTouchingRight();
 
         if(m_Grounded && !wasGrounded) OnLandEvent.Invoke();
 
