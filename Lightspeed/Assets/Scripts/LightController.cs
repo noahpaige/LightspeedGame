@@ -7,10 +7,10 @@ using UnityEngine.UI;
 
 public class LightController : MonoBehaviour
 {
-    public GameObject container;
     public GameObject rays;
     public GameObject trails;
 
+    private GameObject container;
     private Transform lightDaddy;
     private Vector3 originalPosition;
     private Quaternion originalQuat;
@@ -52,6 +52,7 @@ public class LightController : MonoBehaviour
 
     private void Start()
     {
+        container = GameObject.Find("Player").transform.Find("LightContainer").gameObject;
         originalPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         originalQuat = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
         originalScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);

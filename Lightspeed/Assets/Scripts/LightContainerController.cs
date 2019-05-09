@@ -125,4 +125,6 @@ public class LightContainerController : MonoBehaviour
     {
         lights.Clear();
     }
+
+    public int GetLightCount() { return lights.Count; }
 }

@@ -57,8 +57,14 @@ TagManager:
   - name: Player
     uniqueID: 893587433
     locked: 0
-  - name: Light
+  - name: Light Background
     uniqueID: 2965330019
+    locked: 0
+  - name: Light Midground
+    uniqueID: 1517651831
+    locked: 0
+  - name: Light Foreground
+    uniqueID: 2697182487
     locked: 0
   - name: Default
     uniqueID: 0

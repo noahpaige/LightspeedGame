@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/TestStuffHere.unity
     guid: 845116f548da64cd19c264d913a300cf
   - enabled: 0
-    path: Assets/Scenes/poopitydoop.unity
+    path: 
     guid: 8cbcf915e7aeb414fbd509e5fc283ea6
   - enabled: 1
     path: Assets/Scenes/level1.unity
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level2.unity
     guid: f7d9d0f850c69e943b2d19162a72e1e4
+  - enabled: 1
+    path: Assets/Scenes/level3.unity
+    guid: 327a0dddbc277bb418378043c803bed7
   m_configObjects: {}

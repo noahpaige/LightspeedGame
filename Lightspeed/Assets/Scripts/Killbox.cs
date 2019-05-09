@@ -16,15 +16,16 @@ public class Killbox : MonoBehaviour {
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             foreach (Transform child in platforms.transform)
             {
-                child.gameObject.GetComponent<PhysicsPlatformMovementController>().ResetPosition();
+                if(child.gameObject.activeSelf)
+                    child.gameObject.GetComponent<PhysicsPlatformMovementController>().ResetPosition();
             }
 
             List<GameObject> lights = collision.transform.Find("LightContainer").GetComponent<LightContainerController>().GetLights();
             Debug.Log("Lights? " + lights);
             foreach(GameObject light in lights)
             {
-                Debug.Log("Out like a light");
-                light.GetComponent<LightController>().ResetPosition();
+                if (light.activeSelf)
+                    light.GetComponent<LightController>().ResetPosition();
             }
                 collision.transform.Find("LightContainer").GetComponent<LightContainerController>().ClearLights();
         }
