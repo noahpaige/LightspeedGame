@@ -1086,10 +1086,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: '--------------MenuCanvas--------------'
       objectReference: {fileID: 0}
-    - target: {fileID: 1010216534096726, guid: 2d5b4ea25ac978a49b4bb94df0a6d020, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224301492687317500, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1129,6 +1125,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224301492687317500, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224301492687317500, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224301492687317500, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224301492687317500, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
         type: 3}
@@ -1180,96 +1191,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 222025714907213780, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_margin.z
-      value: -1100
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_firstOverflowCharacterIndex
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_isRightToLeft
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_enableWordWrapping
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_enableExtraPadding
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: checkPaddingRequired
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114085293817144638, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452579686877368, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452579686877368, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114394899863348852, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114394899863348852, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114637850892117382, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 523324378}
-    - target: {fileID: 114637850892117382, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMainMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114637850892117382, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d5b4ea25ac978a49b4bb94df0a6d020, type: 3}
 --- !u!1 &523324376 stripped
@@ -1278,24 +1199,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 523324375}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &523324377 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1522427140793772, guid: 2d5b4ea25ac978a49b4bb94df0a6d020,
-    type: 3}
-  m_PrefabInstance: {fileID: 523324375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &523324378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 523324377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c41a0908a1144374bbcfa16f1a4592d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &720096760
 GameObject:
   m_ObjectHideFlags: 0

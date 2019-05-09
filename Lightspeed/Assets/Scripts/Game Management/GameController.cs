@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
     private string mainMenu = "MainMenu";
     private SaveData data;
     private float timer = 0f;
+    private int currentLevel = -1;
 
     void Awake()
     {
@@ -48,13 +49,13 @@ public class GameController : MonoBehaviour {
         int   lightsCollected = Player.transform.Find("LightContainer").GetComponent<LightContainerController>().GetLightCount();
         float bestTime        = timer;
 
-        bool collectedMoreLights = data.lightsCollectedPerLevel[data.currentLevel] < lightsCollected;
-        bool fasterThanPrevious  = data.levelTimes[data.currentLevel]              > timer;
+        bool collectedMoreLights = data.lightsCollectedPerLevel[currentLevel] < lightsCollected;
+        bool fasterThanPrevious  = data.levelTimes[currentLevel] > timer || data.levelTimes[currentLevel] < 0;
 
-        if (!collectedMoreLights) lightsCollected = data.lightsCollectedPerLevel[data.currentLevel];
-        if (!fasterThanPrevious)  bestTime        = data.levelTimes[data.currentLevel];
+        if (!collectedMoreLights) lightsCollected = data.lightsCollectedPerLevel[currentLevel];
+        if (!fasterThanPrevious)  bestTime        = data.levelTimes[currentLevel];
 
-        data.UpdateDataAt(timer, lightsCollected, data.currentLevel);
+        data.UpdateDataAt(bestTime, lightsCollected, currentLevel);
         timer = 0;
         Save();
     }
@@ -62,38 +63,30 @@ public class GameController : MonoBehaviour {
     public void GoToNextScene()
     {
         curLevelIsFinished = false;
-        data.currentLevel = (data.currentLevel + 1) % levels.Length;
-        data.maxLevelReached = Mathf.Max(data.maxLevelReached, data.currentLevel);
-        SceneManager.LoadScene(levels[data.currentLevel]);
+        currentLevel = (currentLevel + 1) % levels.Length;
+        SceneManager.LoadScene(levels[currentLevel]);
         Player = GameObject.Find("Player");
         timer = 0;
     }
 
     public void GoToMainMenu()
     {
-        curLevelIsFinished = false;
-        data.maxLevelReached = Mathf.Max(data.maxLevelReached, data.currentLevel);
+        curLevelIsFinished = true;
         SceneManager.LoadScene(mainMenu);
-    }
-
-    public void PlayCurrentLevel()
-    {
-        curLevelIsFinished = false;
-        SceneManager.LoadScene(levels[data.currentLevel]);
-        Player = GameObject.Find("Player");
-        timer = 0;
     }
 
     public void Save()
     {
-        Debug.Log("Saving Game...");
-        Debug.Log("         Current Level: " + levels[data.currentLevel]);
-        Debug.Log("         Max     Level: " + levels[data.maxLevelReached]);
+        Debug.Log("######################### Saving Game... #########################");
+        Debug.Log("Current Level: " + currentLevel);
         for (int i = 0; i < levels.Length; i++)
         {
+            Debug.Log("             Data for Level: " + i);
             Debug.Log("                 Level Time: " + data.levelTimes[i]);
+            Debug.Log("           Lights Collected: " + data.lightsCollectedPerLevel[i]);
+            Debug.Log("                 Completed?: " + data.completedLevels[i]);
         }
-        Debug.Log("... Game Saved");
+        Debug.Log("######################### ... Game Saved #########################");
         
         SaveSystem.SavePlayerData(data);
     }
@@ -116,8 +109,10 @@ public class GameController : MonoBehaviour {
 
     public void GoToGivenLevel(int level)
     {
+        currentLevel = level - 1;
         SceneManager.LoadScene(levels[level - 1]);
         Player = GameObject.Find("Player");
         timer = 0;
+        curLevelIsFinished = false;
     }
 }

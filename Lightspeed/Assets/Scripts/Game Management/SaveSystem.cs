@@ -9,7 +9,7 @@ public static class SaveSystem {
     public static void SavePlayerData(SaveData data)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        FileStream stream = new FileStream(path, FileMode.Create);
+        FileStream      stream    = new FileStream(path, FileMode.Create);
 
         //SaveData data = new SaveData(curLevel, maxLevel, times);
 
@@ -38,14 +38,19 @@ public static class SaveSystem {
 
     public static SaveData CreateNewSaveData()
     {
-        float[] times = new float[GameController.instance.GetNumLevels()];
-        int[] lightsCollectedPerLevel = new int[GameController.instance.GetNumLevels()];
-        for (int i = 0; i < times.Length; i++)
+        int numLevels = GameController.instance.GetNumLevels();
+
+        float[]    times  = new float[numLevels];
+        int  []    lights = new int  [numLevels];
+        bool [] completed = new bool [numLevels];
+
+        for (int i = 0; i < numLevels; i++)
         {
-            times[i] = -1;
-            lightsCollectedPerLevel[i] = 0;
+            times[i]     = -1;
+            lights[i]    = 0;
+            completed[i] = false;
         }
-        return new SaveData(0,0, times, lightsCollectedPerLevel);
+        return new SaveData(times, lights, completed);
     }
 	
 }

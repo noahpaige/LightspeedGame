@@ -5,22 +5,21 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData {
 
-    public int     currentLevel;
-    public int     maxLevelReached;
     public float[] levelTimes;
-    public int[]   lightsCollectedPerLevel;
+    public int  [] lightsCollectedPerLevel;
+    public bool [] completedLevels;
 
-    public SaveData(int curLevel, int maxLevel, float[] times, int[] lightsCollected)
+    public SaveData(float[] times, int[] lightsCollected, bool[] completed)
     {
-        currentLevel            = curLevel;
-        maxLevelReached         = maxLevel;
         levelTimes              = times;
         lightsCollectedPerLevel = lightsCollected;
+        completedLevels         = completed;
     }
 
     public void UpdateDataAt(float time, int lightsCollected, int index)
     {
         levelTimes[index]              = time;
         lightsCollectedPerLevel[index] = lightsCollected;
+        completedLevels[index]         = true;
     }
 }

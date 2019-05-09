@@ -113,6 +113,7 @@
     <Compile Include="Assets\Scripts\UI Scripts\ButtonGoToMainMenu.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\ButtonGoToNextScene.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\LevelGridItemInfo.cs" />
+    <Compile Include="Assets\Scripts\UI Scripts\LevelSelectController.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\Unused\LightMovementController.cs" />
