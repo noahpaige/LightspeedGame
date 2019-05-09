@@ -20,12 +20,10 @@ public class LevelSelectController : MonoBehaviour
             if (levelNum == 0)
             {
                 button.GetComponent<Button>().interactable = true;
-                button.GetComponent<LevelGridItemInfo>().UpdateLevelInfo();
             }
             else if (data.completedLevels[levelNum])
             {
                 button.GetComponent<Button>().interactable = true;
-                button.GetComponent<LevelGridItemInfo>().UpdateLevelInfo();
             }
             else if (data.completedLevels[levelNum - 1])
             {
@@ -33,8 +31,9 @@ public class LevelSelectController : MonoBehaviour
             }
             else
             {
-                    button.GetComponent<Button>().interactable = false;
+                button.GetComponent<Button>().interactable = false;
             }
+            button.GetComponent<LevelGridItemInfo>().UpdateLevelInfo();
         }
     }
 }
