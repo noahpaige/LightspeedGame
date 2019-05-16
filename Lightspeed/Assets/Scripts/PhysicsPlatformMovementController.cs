@@ -15,12 +15,11 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
     public Vector2 toPoint;
     public float startMovingPoint;
     public float endMovingPoint;
-    public GameObject player;
     public float maxSpeed = 5f;
     public float drag = 0.5f;
 
     private Rigidbody2D rb;
-
+    private GameObject player;
     private Vector2 prevPlayerPosition;
     private float speedFactor;
 
@@ -28,6 +27,7 @@ public class PhysicsPlatformMovementController : MonoBehaviour {
 
     void Start()
     {
+        player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
         //rb.drag = drag;
 

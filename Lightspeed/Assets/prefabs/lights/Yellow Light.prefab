@@ -4721,8 +4721,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
-  m_SortingLayer: -3
+  m_SortingLayerID: 893587433
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1
   m_SortMode: 3
@@ -4812,6 +4812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rays: {fileID: 7440064352201926427}
   trails: {fileID: 7441791782144187582}
+  decayTime: 10
   minMoveSpeed: 0.6
   maxMoveSpeed: 0.85
   moveSpeed: 0
@@ -9632,8 +9633,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
-  m_SortingLayer: -3
+  m_SortingLayerID: 893587433
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1
   m_SortMode: 3

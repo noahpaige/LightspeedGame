@@ -11,6 +11,7 @@ public class OnCollisionEvent : MonoBehaviour {
     {
         if(e != null)
         {
+            Debug.Log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Triggered finish");
             e.Invoke();
         }
     }

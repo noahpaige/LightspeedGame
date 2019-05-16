@@ -4721,7 +4721,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
+  m_SortingLayerID: 893587433
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1
@@ -4790,8 +4790,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 20
+  m_Intensity: 3
+  m_Range: 3
   m_SpotAngle: 179
   m_CookieSize: 1
   m_Shadows:
@@ -4863,7 +4863,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3220837228890139102}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4901,9 +4901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f0151168775714981abdfd8eb73177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
   rays: {fileID: 3220521568861975822}
   trails: {fileID: 3222169835042148011}
+  decayTime: 5
   minMoveSpeed: 0.6
   maxMoveSpeed: 0.85
   moveSpeed: 0
@@ -9633,7 +9633,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
+  m_SortingLayerID: 893587433
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1

@@ -22,7 +22,7 @@ TagManager:
   - LightSources
   - LightObstacles
   - AmbientLight
-  - 
+  - Background
   - 
   - 
   - 
@@ -42,29 +42,44 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background1
-    uniqueID: 1038151325
+  - name: City Background Back
+    uniqueID: 2965330019
     locked: 0
-  - name: Background2
-    uniqueID: 22580831
+  - name: City Background Mid 3
+    uniqueID: 1517651831
     locked: 0
-  - name: Background3
-    uniqueID: 2460606773
+  - name: Fog 3
+    uniqueID: 1864459245
+    locked: 0
+  - name: City Background Mid 2
+    uniqueID: 2697182487
+    locked: 0
+  - name: Fog 2
+    uniqueID: 436014917
+    locked: 0
+  - name: City Background Mid 1
+    uniqueID: 2989650253
+    locked: 0
+  - name: Fog 1
+    uniqueID: 3562685941
+    locked: 0
+  - name: City Background Fore
+    uniqueID: 3624347413
+    locked: 0
+  - name: Portal Background
+    uniqueID: 2487347969
+    locked: 0
+  - name: Portal Midground
+    uniqueID: 909314513
+    locked: 0
+  - name: Portal Foreground
+    uniqueID: 2611287733
     locked: 0
   - name: Midground
     uniqueID: 1247604199
     locked: 0
   - name: Player
     uniqueID: 893587433
-    locked: 0
-  - name: Light Background
-    uniqueID: 2965330019
-    locked: 0
-  - name: Light Midground
-    uniqueID: 1517651831
-    locked: 0
-  - name: Light Foreground
-    uniqueID: 2697182487
     locked: 0
   - name: Default
     uniqueID: 0

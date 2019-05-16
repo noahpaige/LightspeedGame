@@ -15,7 +15,7 @@ public class LevelSelectController : MonoBehaviour
         {
             int levelNum = button.GetComponent<LevelGridItemInfo>().LevelNumber - 1;
 
-            Debug.Log("Completed level " + (levelNum + 1) + "? --> " + data.completedLevels[levelNum]);
+            //Debug.Log("Completed level " + (levelNum + 1) + "? --> " + data.completedLevels[levelNum]);
 
             if (levelNum == 0)
             {

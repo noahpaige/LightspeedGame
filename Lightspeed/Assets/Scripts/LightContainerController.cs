@@ -5,16 +5,17 @@ using UnityEngine;
 public class LightContainerController : MonoBehaviour
 {
     public CircleCollider2D col;
+    [Range(0f, 1f)] public float collectedScaleFactor = 0.5f;
+    public Transform playerTransform;
+
     private float colRadius = 0f;
     private Vector3[] toPositions;
     private Vector3[] fromPositions;
     private List<GameObject> lights;
     private float time;
+    private bool lightsStillArranging = false;
 
-    private bool lightsStillMoving = false;
-
-    [Range(0f, 1f)] public float collectedScaleFactor = 0.5f;
-    public Transform playerTransform;
+    private GameObject mostRecentlyCollected;
 
     // Start is called before the first frame update
     void Start()
@@ -26,26 +27,15 @@ public class LightContainerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        bool lightsStillMoving = ArrangeLights();
-        if(!lightsStillMoving) FollowPlayer();
-    }
-
-    public void AddLight(GameObject addme)
-    {
-        lights.Add(addme);
-        //addme.transform.SetParent(transform.parent);
-        toPositions = getPositions(lights.Count, colRadius);
-        lightsStillMoving = true;
-        time = 0f;
-        Vector3[] from = new Vector3[lights.Count];
-        for (int i = 0; i < lights.Count; i++)
+        if(lightsStillArranging) ArrangeLights();
+        else
         {
-            from[i] = lights[i].transform.position;
+            Decay();
         }
-        fromPositions = from;
+        FollowPlayer();
     }
 
-    private Vector3[] getPositions(int n, float radius)
+    private Vector3[] GetRadialDestinationPositions(int n, float radius)
     {
         Vector3[] positions = new Vector3[n];
         if (n < 1) return positions;
@@ -69,43 +59,42 @@ public class LightContainerController : MonoBehaviour
         return positions;
     }
 
-    private bool ArrangeLights()
+    private void ArrangeLights()
     {
         bool moved = false;
-        if (lightsStillMoving)
+        
+        for (int i = 0; i < lights.Count; i++)
         {
-            for (int i = 0; i < lights.Count; i++)
+            GameObject light = lights[i];
+            float scale = CalculateScale();
+            float modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
+            if (modifiedTime < 1f)
             {
-                GameObject light = lights[i];
-                float scale = collectedScaleFactor + (1f - collectedScaleFactor) * (1f / Mathf.Pow(1.5f, lights.Count - 1.0f));
-                float modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
-                if (modifiedTime < 1f)
-                {
-                    //arrange lights
-                    light.transform.position = Vector3.Lerp(fromPositions[i], toPositions[i] + playerTransform.position, modifiedTime);
-                    moved = true;
+                //arrange lights
+                Vector3 toPosition = new Vector3(toPositions[i].x + playerTransform.position.x, toPositions[i].y + playerTransform.position.y, light.transform.position.z);
+                light.transform.position = Vector3.Lerp(fromPositions[i], toPosition, modifiedTime);
+                moved = true;
 
-                    //reduce size of rays and trail particles
-                    GameObject rays = light.GetComponent<LightController>().rays;
-                    GameObject trails = light.GetComponent<LightController>().trails;
-                    Vector3 newScale = Vector3.Lerp(Vector3.one, new Vector3(scale, scale, scale), time);
-                    rays.transform.localScale = newScale;
-                    trails.transform.localScale = newScale;
+                //reduce size of rays and trail particles
+                GameObject rays = light.GetComponent<LightController>().rays;
+                GameObject trails = light.GetComponent<LightController>().trails;
+                Vector3 newScale = Vector3.Lerp(Vector3.one, new Vector3(scale, scale, 1), time);
+                rays.transform.localScale = newScale;
+                trails.transform.localScale = newScale;
 
-                    //reduce alpha
-                    ParticleSystem.MainModule settings = rays.GetComponent<ParticleSystem>().main;
-                    Color reducedAlpha = new Color(settings.startColor.color.r, settings.startColor.color.g, settings.startColor.color.b, scale);
-                    //settings.startColor = new ParticleSystem.MinMaxGradient(reducedAlpha);
-                    settings.startColor = reducedAlpha;
-                }
+                //reduce alpha
+                ParticleSystem.MainModule settings = rays.GetComponent<ParticleSystem>().main;
+                Color reducedAlpha = new Color(settings.startColor.color.r, settings.startColor.color.g, settings.startColor.color.b, scale);
+                //settings.startColor = new ParticleSystem.MinMaxGradient(reducedAlpha);
+                settings.startColor = reducedAlpha;
             }
-            time += Time.deltaTime;
         }
+        time += Time.deltaTime;
+        
         if (!moved)
         {
-            lightsStillMoving = false;
+            lightsStillArranging = false;
         }
-        return lightsStillMoving;
     }
 
     private void FollowPlayer()
@@ -115,6 +104,59 @@ public class LightContainerController : MonoBehaviour
             Vector3 desiredPos = toPositions[i] + playerTransform.position;
             lights[i].transform.position = Vector3.Lerp(lights[i].transform.position, desiredPos, lights[i].GetComponent<LightController>().moveSpeed / 2f);
         }
+    }
+
+    private void Decay()
+    {
+        if (mostRecentlyCollected != null)
+        {
+            float scale = CalculateScale();
+            scale *= mostRecentlyCollected.GetComponent<LightController>().GetDecayAmount();
+            //reduce size of rays and trail particles
+            GameObject rays = mostRecentlyCollected.GetComponent<LightController>().rays;
+            GameObject trails = mostRecentlyCollected.GetComponent<LightController>().trails;
+            Vector3 newScale = new Vector3(scale, scale, 1);
+            rays.transform.localScale = newScale;
+            trails.transform.localScale = newScale;
+
+            mostRecentlyCollected.GetComponent<LightController>().DecayUpdate();
+        }
+    }
+
+    private float CalculateScale()
+    {
+        return collectedScaleFactor + (1f - collectedScaleFactor) * (1f / Mathf.Pow(1.5f, lights.Count - 1.0f));
+    }
+
+    public void AddLight(GameObject addme)
+    {
+        lights.Add(addme);
+        mostRecentlyCollected = addme;
+        lightsStillArranging = true;
+        toPositions = GetRadialDestinationPositions(lights.Count, colRadius);
+        time = 0f;
+        Vector3[] from = new Vector3[lights.Count];
+        for (int i = 0; i < lights.Count; i++)
+        {
+            from[i] = lights[i].transform.position;
+        }
+        fromPositions = from;
+    }
+
+    public void RemoveLight(GameObject light)
+    {
+        lights.Remove(light);
+        toPositions = GetRadialDestinationPositions(lights.Count, colRadius);
+        lightsStillArranging = true;
+        time = 0f;
+        Vector3[] from = new Vector3[lights.Count];
+        for (int i = 0; i < lights.Count; i++)
+        {
+            from[i] = lights[i].transform.position;
+        }
+        fromPositions = from;
+        if (lights.Count > 0) mostRecentlyCollected = lights[lights.Count - 1];
+        else mostRecentlyCollected = null;
     }
 
     public List<GameObject> GetLights()
@@ -127,4 +169,19 @@ public class LightContainerController : MonoBehaviour
     }
 
     public int GetLightCount() { return lights.Count; }
+
+    public float GetLightMovementFactor()
+    {
+        if (lights.Count <= 0) return 0;
+        else if (lightsStillArranging)
+        {
+            return lights.Count * CalculateScale();
+        }
+        else
+        {
+            float factor = (lights.Count - 1) * CalculateScale();
+            return factor += mostRecentlyCollected.GetComponent<LightController>().rays.transform.localScale.x;
+        }
+
+    }
 }

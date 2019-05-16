@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour {
     private SaveData data;
     private float timer = 0f;
     private int currentLevel = -1;
+    private GameObject lights;
+    private GameObject finishPortal;
+    
 
     void Awake()
     {
@@ -37,8 +40,20 @@ public class GameController : MonoBehaviour {
 
     private void Update()
     {
-        if (Player == null) Player = GameObject.Find("Player");
+        if (Player       == null) Player       = GameObject.Find("Player");
+        if (finishPortal == null) finishPortal = GameObject.Find("Finish Portal");
+        if (lights       == null) lights       = GameObject.Find("Lights");
         if (!curLevelIsFinished) timer += Time.deltaTime;
+
+        LightContainerController lcon = Player.transform.Find("LightContainer").GetComponent<LightContainerController>();
+
+        int numLightsCollected = lcon.GetLightCount();
+        if (AllLightsCollected(numLightsCollected))
+            finishPortal.SetActive(true);
+        else
+            finishPortal.SetActive(false);
+
+        Debug.Log("Light Movement Factor ------------> " + lcon.GetLightMovementFactor());
     }
 
     public void PlayerWon()
@@ -56,7 +71,6 @@ public class GameController : MonoBehaviour {
         if (!fasterThanPrevious)  bestTime        = data.levelTimes[currentLevel];
 
         data.UpdateDataAt(bestTime, lightsCollected, currentLevel);
-        timer = 0;
         Save();
     }
 
@@ -65,7 +79,11 @@ public class GameController : MonoBehaviour {
         curLevelIsFinished = false;
         currentLevel = (currentLevel + 1) % levels.Length;
         SceneManager.LoadScene(levels[currentLevel]);
-        Player = GameObject.Find("Player");
+
+        Player       = GameObject.Find("Player");
+        finishPortal = GameObject.Find("Finish Portal");
+        lights       = GameObject.Find("Lights");
+
         timer = 0;
     }
 
@@ -111,8 +129,19 @@ public class GameController : MonoBehaviour {
     {
         currentLevel = level - 1;
         SceneManager.LoadScene(levels[level - 1]);
-        Player = GameObject.Find("Player");
+
+        Player       = GameObject.Find("Player");
+        finishPortal = GameObject.Find("Finish Portal");
+        lights       = GameObject.Find("Lights");
+
         timer = 0;
         curLevelIsFinished = false;
+    }
+
+    private bool AllLightsCollected(int collected)
+    {
+        int numLightsInCurLevel = lights.transform.childCount;
+        if (collected == numLightsInCurLevel) return true;
+        return false;
     }
 }

@@ -4721,7 +4721,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
+  m_SortingLayerID: 893587433
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1
@@ -4759,7 +4759,7 @@ GameObject:
   - component: {fileID: 1023975932}
   - component: {fileID: 164481495}
   m_Layer: 0
-  m_Name: Light
+  m_Name: Light Blue Light
   m_TagString: light
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4810,9 +4810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f0151168775714981abdfd8eb73177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  container: {fileID: 0}
   rays: {fileID: 1940814354839996}
   trails: {fileID: 1847263769}
+  decayTime: 20
   minMoveSpeed: 0.6
   maxMoveSpeed: 0.85
   moveSpeed: 0
@@ -4864,8 +4864,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 20
+  m_Intensity: 3
+  m_Range: 3
   m_SpotAngle: 179
   m_CookieSize: 1
   m_Shadows:
@@ -9633,7 +9633,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1329637277
+  m_SortingLayerID: 893587433
   m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 1
