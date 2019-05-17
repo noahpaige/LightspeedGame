@@ -94,6 +94,7 @@
     <Compile Include="Assets\Light2D\Scripts\ObstacleCameraPostPorcessor.cs" />
     <Compile Include="Assets\Light2D\Scripts\Point2.cs" />
     <Compile Include="Assets\Light2D\Scripts\Util.cs" />
+    <Compile Include="Assets\MyCanvasScaler.cs" />
     <Compile Include="Assets\Scripts\AnimationController.cs" />
     <Compile Include="Assets\Scripts\BezierObjectMovementController.cs" />
     <Compile Include="Assets\Scripts\CamFollower.cs" />

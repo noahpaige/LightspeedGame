@@ -6,11 +6,10 @@ using TMPro;
 public class LevelGridItemInfo : MonoBehaviour
 {
     public int LevelNumber;
-    public int NumberLightsInLevel;
+    //public int NumberLightsInLevel;
 
     public TextMeshProUGUI LevelText;
     public TextMeshProUGUI TimeText;
-    public TextMeshProUGUI LightsText;
 
 
     private void Start()
@@ -34,12 +33,12 @@ public class LevelGridItemInfo : MonoBehaviour
 
         LevelText.SetText("Level " + LevelNumber.ToString());
 
-        float levelTime = data.levelTimes[LevelNumber - 1];
+        float levelTime = Mathf.Round(data.levelTimes[LevelNumber - 1] * 100f) / 100f;
         if (levelTime < 0) TimeText.SetText("Time: --");
         else TimeText.SetText("Time: " + levelTime); // string.Format("{0:.##}", levelTime)); //round to two decimal places
 
-        int lightsCollected = data.lightsCollectedPerLevel[LevelNumber - 1];
-        LightsText.SetText("Lights: " + lightsCollected.ToString() + "/" + NumberLightsInLevel);
+        //int lightsCollected = data.lightsCollectedPerLevel[LevelNumber - 1];
+        //LightsText.SetText("Lights: " + lightsCollected.ToString() + "/" + NumberLightsInLevel);
     }
 
 }

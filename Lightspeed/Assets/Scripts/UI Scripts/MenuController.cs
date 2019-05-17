@@ -43,7 +43,7 @@ public class MenuController : MonoBehaviour {
     public void LoadMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        GameController.instance.GoToMainMenu();
     }
 
     public void QuitGame()

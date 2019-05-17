@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour {
 
     public static GameController instance;
-    public GameObject Player;
     [HideInInspector] public bool curLevelIsFinished = false;
 
-    private static string[] levels = {"level1", "level2", "level3"};
-    private string mainMenu = "MainMenu";
-    private SaveData data;
-    private float timer = 0f;
-    private int currentLevel = -1;
-    private GameObject lights;
-    private GameObject finishPortal;
+    private static string[] levels   = {"level1", "level2", "level3"};
+    private string          mainMenu = "MainMenu";
+    private SaveData        data;
+    private GameObject      Player;
+    private float           timer        = 0f;
+    private int             currentLevel = -1;
+    private GameObject      lights;
+    private GameObject      finishPortal;
+    private TextMeshProUGUI TimeText;
     
 
     void Awake()
@@ -30,6 +32,8 @@ public class GameController : MonoBehaviour {
         //data = SaveSystem.LoadPlayer();    
         data = SaveSystem.CreateNewSaveData();
 
+        TimeText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
+        TimeText.gameObject.SetActive(false);
 
         if (data == null)
         {
@@ -52,6 +56,10 @@ public class GameController : MonoBehaviour {
             finishPortal.SetActive(true);
         else
             finishPortal.SetActive(false);
+
+
+
+        TimeText.text = (Mathf.Round(timer * 100f) / 100f).ToString() + " s";
 
         Debug.Log("Light Movement Factor ------------> " + lcon.GetLightMovementFactor());
     }
@@ -85,12 +93,14 @@ public class GameController : MonoBehaviour {
         lights       = GameObject.Find("Lights");
 
         timer = 0;
+        TimeText.gameObject.SetActive(true);
     }
 
     public void GoToMainMenu()
     {
         curLevelIsFinished = true;
         SceneManager.LoadScene(mainMenu);
+        TimeText.gameObject.SetActive(false);
     }
 
     public void Save()
@@ -136,6 +146,7 @@ public class GameController : MonoBehaviour {
 
         timer = 0;
         curLevelIsFinished = false;
+        TimeText.gameObject.SetActive(true);
     }
 
     private bool AllLightsCollected(int collected)

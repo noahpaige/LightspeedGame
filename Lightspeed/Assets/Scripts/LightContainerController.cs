@@ -65,26 +65,27 @@ public class LightContainerController : MonoBehaviour
         
         for (int i = 0; i < lights.Count; i++)
         {
-            GameObject light = lights[i];
-            float scale = CalculateScale();
-            float modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
+            GameObject light        = lights[i];
+            float      scale        = CalculateScale();
+            float      modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
             if (modifiedTime < 1f)
             {
                 //arrange lights
-                Vector3 toPosition = new Vector3(toPositions[i].x + playerTransform.position.x, toPositions[i].y + playerTransform.position.y, light.transform.position.z);
+                Vector3 toPosition       = new Vector3(toPositions[i].x + playerTransform.position.x, toPositions[i].y + playerTransform.position.y, light.transform.position.z);
                 light.transform.position = Vector3.Lerp(fromPositions[i], toPosition, modifiedTime);
                 moved = true;
 
                 //reduce size of rays and trail particles
-                GameObject rays = light.GetComponent<LightController>().rays;
-                GameObject trails = light.GetComponent<LightController>().trails;
-                Vector3 newScale = Vector3.Lerp(Vector3.one, new Vector3(scale, scale, 1), time);
-                rays.transform.localScale = newScale;
+                GameObject rays     = light.GetComponent<LightController>().rays;
+                GameObject trails   = light.GetComponent<LightController>().trails;
+                Vector3    newScale = Vector3.Lerp(Vector3.one, new Vector3(scale, scale, 1), time);
+
+                rays.transform.localScale   = newScale;
                 trails.transform.localScale = newScale;
 
                 //reduce alpha
-                ParticleSystem.MainModule settings = rays.GetComponent<ParticleSystem>().main;
-                Color reducedAlpha = new Color(settings.startColor.color.r, settings.startColor.color.g, settings.startColor.color.b, scale);
+                ParticleSystem.MainModule settings     = rays.GetComponent<ParticleSystem>().main;
+                Color                     reducedAlpha = new Color(settings.startColor.color.r, settings.startColor.color.g, settings.startColor.color.b, scale);
                 //settings.startColor = new ParticleSystem.MinMaxGradient(reducedAlpha);
                 settings.startColor = reducedAlpha;
             }
@@ -112,11 +113,12 @@ public class LightContainerController : MonoBehaviour
         {
             float scale = CalculateScale();
             scale *= mostRecentlyCollected.GetComponent<LightController>().GetDecayAmount();
+            
             //reduce size of rays and trail particles
-            GameObject rays = mostRecentlyCollected.GetComponent<LightController>().rays;
-            GameObject trails = mostRecentlyCollected.GetComponent<LightController>().trails;
-            Vector3 newScale = new Vector3(scale, scale, 1);
-            rays.transform.localScale = newScale;
+            GameObject rays             = mostRecentlyCollected.GetComponent<LightController>().rays;
+            GameObject trails           = mostRecentlyCollected.GetComponent<LightController>().trails;
+            Vector3    newScale         = new Vector3(scale, scale, 1);
+            rays.transform.localScale   = newScale;
             trails.transform.localScale = newScale;
 
             mostRecentlyCollected.GetComponent<LightController>().DecayUpdate();
@@ -166,6 +168,7 @@ public class LightContainerController : MonoBehaviour
     public void ClearLights()
     {
         lights.Clear();
+        mostRecentlyCollected = null;
     }
 
     public int GetLightCount() { return lights.Count; }

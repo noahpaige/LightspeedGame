@@ -21,7 +21,6 @@ public class Killbox : MonoBehaviour {
             }
 
             List<GameObject> lights = collision.transform.Find("LightContainer").GetComponent<LightContainerController>().GetLights();
-            Debug.Log("Lights? " + lights);
             foreach(GameObject light in lights)
             {
                 if (light.activeSelf)
