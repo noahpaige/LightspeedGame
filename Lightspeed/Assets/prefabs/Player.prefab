@@ -5038,7 +5038,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 97299bf6da2909947a8d74ff072a7bcc, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &70353640626723808
 CapsuleCollider2D:
@@ -5069,7 +5069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 114341797278542498}
-  runSpeed: 60
+  runSpeed: 30
 --- !u!114 &114341797278542498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5145,6 +5145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1136d549ddb3d4e40bbf46561715d363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animSpeedFactor: 3
 --- !u!60 &60354784019937700
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5303,5 +5304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 3832656088826622457}
-  collectedScaleFactor: 0.4
+  minLightFactor: 1
+  maxLightFactor: 2
   playerTransform: {fileID: 4991591220638548}

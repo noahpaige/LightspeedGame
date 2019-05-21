@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Killbox : MonoBehaviour {
 
-    public GameObject platforms;
-    public GameObject spawnPoint;
+    private GameObject platforms;
+    private GameObject spawnPoint;
 
+    private void Start()
+    {
+        platforms = GameObject.Find("Platforms");
+        spawnPoint = GameObject.Find("spawnpoint");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

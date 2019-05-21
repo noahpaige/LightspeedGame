@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour {
     public static GameController instance;
     [HideInInspector] public bool curLevelIsFinished = false;
 
-    private static string[] levels   = {"level1", "level2", "level3"};
+    private static string[] levels   = {"level1", "level2", "level3", "level4", "level5" };
     private string          mainMenu = "MainMenu";
     private SaveData        data;
     private GameObject      Player;
@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
     private GameObject      lights;
     private GameObject      finishPortal;
     private TextMeshProUGUI TimeText;
+    private LightContainerController lcon;
     
 
     void Awake()
@@ -47,21 +48,26 @@ public class GameController : MonoBehaviour {
         if (Player       == null) Player       = GameObject.Find("Player");
         if (finishPortal == null) finishPortal = GameObject.Find("Finish Portal");
         if (lights       == null) lights       = GameObject.Find("Lights");
+        if (lcon == null)
+        {
+            if (Player != null) lcon = Player.transform.Find("LightContainer").GetComponent<LightContainerController>();
+        }
         if (!curLevelIsFinished) timer += Time.deltaTime;
 
-        LightContainerController lcon = Player.transform.Find("LightContainer").GetComponent<LightContainerController>();
-
-        int numLightsCollected = lcon.GetLightCount();
-        if (AllLightsCollected(numLightsCollected))
-            finishPortal.SetActive(true);
-        else
-            finishPortal.SetActive(false);
+        if(Player != null)
+        {
+            int numLightsCollected = lcon.GetLightCount();
+            if (AllLightsCollected(numLightsCollected))
+                finishPortal.SetActive(true);
+            else
+                finishPortal.SetActive(false);
+        }
 
 
 
         TimeText.text = (Mathf.Round(timer * 100f) / 100f).ToString() + " s";
 
-        Debug.Log("Light Movement Factor ------------> " + lcon.GetLightMovementFactor());
+        //Debug.Log("Light Movement Factor ------------> " + lcon.GetLightMovementFactor());
     }
 
     public void PlayerWon()

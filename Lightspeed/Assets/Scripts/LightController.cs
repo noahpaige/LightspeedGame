@@ -103,4 +103,8 @@ public class LightController : MonoBehaviour
         shape.arc = 360f * (decayTime / originalDecay);
     }
 
+    public void ResetDecayTime()
+    {
+        decayTime = originalDecay;
+    }
 }

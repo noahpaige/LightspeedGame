@@ -5,7 +5,9 @@ using UnityEngine;
 public class LightContainerController : MonoBehaviour
 {
     public CircleCollider2D col;
-    [Range(0f, 1f)] public float collectedScaleFactor = 0.5f;
+    public float minLightFactor = 1f;
+    public float maxLightFactor = 2f;
+    [Range(0.1f, 1f)] public float arrangeTime = 1f;
     public Transform playerTransform;
 
     private float colRadius = 0f;
@@ -28,10 +30,8 @@ public class LightContainerController : MonoBehaviour
     void FixedUpdate()
     {
         if(lightsStillArranging) ArrangeLights();
-        else
-        {
-            Decay();
-        }
+        else                     Decay();
+        
         FollowPlayer();
     }
 
@@ -62,18 +62,19 @@ public class LightContainerController : MonoBehaviour
     private void ArrangeLights()
     {
         bool moved = false;
-        
+        //Debug.Log("Scale = " + CalculateScale() + "Light count " + lights.Count);
         for (int i = 0; i < lights.Count; i++)
         {
             GameObject light        = lights[i];
             float      scale        = CalculateScale();
             float      modifiedTime = time * light.GetComponent<LightController>().moveSpeed;
-            if (modifiedTime < 1f)
+            
+            if (modifiedTime < arrangeTime)
             {
+                moved = true;
                 //arrange lights
                 Vector3 toPosition       = new Vector3(toPositions[i].x + playerTransform.position.x, toPositions[i].y + playerTransform.position.y, light.transform.position.z);
                 light.transform.position = Vector3.Lerp(fromPositions[i], toPosition, modifiedTime);
-                moved = true;
 
                 //reduce size of rays and trail particles
                 GameObject rays     = light.GetComponent<LightController>().rays;
@@ -127,7 +128,9 @@ public class LightContainerController : MonoBehaviour
 
     private float CalculateScale()
     {
-        return collectedScaleFactor + (1f - collectedScaleFactor) * (1f / Mathf.Pow(1.5f, lights.Count - 1.0f));
+        if      (lights.Count == 0) return minLightFactor / 2f;
+        else if (lights.Count == 1) return minLightFactor;
+        else                        return (minLightFactor + (maxLightFactor - minLightFactor) * ((float)lights.Count / (lights.Count + 1f))) / lights.Count;
     }
 
     public void AddLight(GameObject addme)
@@ -141,10 +144,11 @@ public class LightContainerController : MonoBehaviour
         for (int i = 0; i < lights.Count; i++)
         {
             from[i] = lights[i].transform.position;
+            lights[i].GetComponent<LightController>().ResetDecayTime();
         }
         fromPositions = from;
     }
-
+    
     public void RemoveLight(GameObject light)
     {
         lights.Remove(light);
@@ -175,16 +179,23 @@ public class LightContainerController : MonoBehaviour
 
     public float GetLightMovementFactor()
     {
-        if (lights.Count <= 0) return 0;
+        if (lights.Count <= 0) return CalculateScale();
         else if (lightsStillArranging)
         {
-            return lights.Count * CalculateScale();
+            return (minLightFactor / 2f) + (minLightFactor / 2f) * lights.Count * CalculateScale();
         }
         else
         {
             float factor = (lights.Count - 1) * CalculateScale();
-            return factor += mostRecentlyCollected.GetComponent<LightController>().rays.transform.localScale.x;
+            float recentFactor = mostRecentlyCollected.GetComponent<LightController>().rays.transform.localScale.x;
+            return factor + ((CalculateScale() / 2f) + (recentFactor / 2f));
+           
         }
 
+    }
+
+    public float CalculateAnimationSpeed()
+    {
+        return GetLightMovementFactor() / maxLightFactor;
     }
 }

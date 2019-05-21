@@ -94,6 +94,6 @@ public class ParallaxController : MonoBehaviour {
         leftIndex++;
         if (leftIndex == panels.Length)
             leftIndex = 0;
-        Debug.Log("Right Index = " + rightIndex + "       Left Index = " + leftIndex);
+        //Debug.Log("Right Index = " + rightIndex + "       Left Index = " + leftIndex);
     }
 }

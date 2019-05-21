@@ -13,18 +13,18 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] private Transform m_LeftCheck;                             // A position marking where to check is touching something to their left
     [SerializeField] private Transform m_RightCheck;                            // A position marking where to check is touching something to their right
-    [Range(0, 20f)] [SerializeField] private float maxVelocity;
+    [Range(0, 40f)] [SerializeField] private float maxVelocity;
 
-    const float k_PlayerWidthRadius = .2f;                                      // Radius of the overlap area for player width
-    const float k_PlayerHeightRadius = 1.081f;                                  // Radius of the overlap area for player height
-    const float k_AreaCheckWidth = 0.05f;
+    const float  k_PlayerWidthRadius  = .2f;                                    // Radius of the overlap area for player width
+    const float  k_PlayerHeightRadius = 1.081f;                                 // Radius of the overlap area for player height
+    const float  k_AreaCheckWidth     = 0.05f;
     private bool m_Grounded;                                                    // Whether or not the player is grounded.
     private bool m_TouchingCeiling;                                             // Whether or not the player is touching something above them
     private bool m_TouchingLeft;                                                // Whether or not the player is touching something to the left of them
     private bool m_TouchingRight;                                               // Whether or not the player is touching something to the right of them
     private Rigidbody2D m_Rigidbody2D;
-    private bool m_FacingRight = true;                                          // For determining which way the player is currently facing.
-    private Vector3 m_Velocity = Vector3.zero;
+    private bool    m_FacingRight = true;                                       // For determining which way the player is currently facing.
+    private Vector3 m_Velocity    = Vector3.zero;
 
 
     private AnimationController animationController;

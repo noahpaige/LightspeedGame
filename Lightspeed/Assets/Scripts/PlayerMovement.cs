@@ -11,16 +11,20 @@ public class PlayerMovement : MonoBehaviour {
     private float horizontalMove = 0f;
     private bool jump = false;
 
+    private LightContainerController lcon;
+
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+    {
+        lcon = transform.Find("LightContainer").GetComponent<LightContainerController>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 
-        horizontalMove = Input.GetAxis("Horizontal") * runSpeed;
+        horizontalMove = Input.GetAxis("Horizontal") * runSpeed * lcon.GetLightMovementFactor();
 
         if (Input.GetButtonDown("Jump"))
         {

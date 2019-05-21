@@ -62,17 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\DropdownEditor.cs" />
-    <Compile Include="Assets\Light2D\Editor\Light2DMenu.cs" />
-    <Compile Include="Assets\Light2D\Editor\LightingSystemCreationWindow.cs" />
-    <Compile Include="Assets\Light2D\Editor\LightingSystemEditor.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\BlockTilingInfoDrawer.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\EditorCameraWindow.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\HingeAutoRotatorEditor.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\HingeJointUtil.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\LandingLegEditor.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\Point2Drawer.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\ReadOnlyDrawer.cs" />
-    <Compile Include="Assets\Light2D\Examples\Editor\ScriptableObjectCreatorWindow.cs" />
     <Reference Include="Unity.2D.Animation.Runtime">
       <HintPath>C:/Users/Gamer/Desktop/csc/Senior Project/LightspeedGame/Lightspeed/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
