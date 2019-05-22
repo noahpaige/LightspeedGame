@@ -160,6 +160,11 @@ public class CharacterController2D : MonoBehaviour
         return true;
     }
 
+    public bool GetIsGrounded()
+    {
+        return m_Grounded;
+    }
+
     private bool IsColliderTouchingAbove(Collider2D[] cols)
     {
         foreach (Collider2D col in cols)

@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour {
 
-    public  float animSpeedFactor = 1f;
-    private Animator ani;
-    private Rigidbody2D rb2d;
-    private bool isJumping = false;
+    public float animSpeedFactor = 1f;
+
+    private Animator                 ani;
+    private Rigidbody2D              rb2d;
+    private bool                     isJumping = false;
     private LightContainerController lcon;
 
 	// Use this for initialization
@@ -32,5 +33,10 @@ public class AnimationController : MonoBehaviour {
     {
         isJumping = b;
         //Debug.Log("Jumping: " + isJumping);
+    }
+
+    public float GetAnimSpeed()
+    {
+        return lcon.CalculateAnimationSpeed() * animSpeedFactor;
     }
 }

@@ -62,10 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimationController.cs" />
-    <Compile Include="Assets\Scripts\BezierObjectMovementController.cs" />
     <Compile Include="Assets\Scripts\CamFollower.cs" />
     <Compile Include="Assets\Scripts\CharacterController2D.cs" />
-    <Compile Include="Assets\Scripts\ColorLerpController.cs" />
     <Compile Include="Assets\Scripts\Game Management\GameController.cs" />
     <Compile Include="Assets\Scripts\Game Management\ResetSaveDataTrigger.cs" />
     <Compile Include="Assets\Scripts\Game Management\SaveData.cs" />
@@ -77,6 +75,11 @@
     <Compile Include="Assets\Scripts\PhysicsPlatformMovementController.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PortalCollisionController.cs" />
+    <Compile Include="Assets\Scripts\Sound\FootstepPlayer.cs" />
+    <Compile Include="Assets\Scripts\Sound\LightCollectSoundPlayer.cs" />
+    <Compile Include="Assets\Scripts\Sound\MenuSoundController.cs" />
+    <Compile Include="Assets\Scripts\Sound\MusicSpeedController.cs" />
+    <Compile Include="Assets\Scripts\Sound\NeonSoundPlayer.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\ButtonGoToMainMenu.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\ButtonGoToNextScene.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\LevelGridItemInfo.cs" />
@@ -86,6 +89,8 @@
     <Compile Include="Assets\Scripts\UI Scripts\MenuController.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\MyCanvasScaler.cs" />
     <Compile Include="Assets\Scripts\UI Scripts\TitleFlicker.cs" />
+    <Compile Include="Assets\Scripts\Unused\BezierObjectMovementController.cs" />
+    <Compile Include="Assets\Scripts\Unused\ColorLerpController.cs" />
     <Compile Include="Assets\Scripts\Unused\LightMovementController.cs" />
     <Compile Include="Assets\Scripts\Unused\ObjectMovementController.cs" />
     <Compile Include="Assets\Scripts\Unused\ParallaxController.cs" />

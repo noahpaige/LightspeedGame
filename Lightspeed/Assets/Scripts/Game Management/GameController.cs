@@ -30,8 +30,8 @@ public class GameController : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
 
         //######################################### uncomment before release#################################################
-        //data = SaveSystem.LoadPlayer();    
-        data = SaveSystem.CreateNewSaveData();
+        data = SaveSystem.LoadPlayer();    
+        //data = SaveSystem.CreateNewSaveData();
 
         TimeText = transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>();
         TimeText.gameObject.SetActive(false);
@@ -57,10 +57,13 @@ public class GameController : MonoBehaviour {
         if(Player != null)
         {
             int numLightsCollected = lcon.GetLightCount();
-            if (AllLightsCollected(numLightsCollected))
-                finishPortal.SetActive(true);
-            else
-                finishPortal.SetActive(false);
+            if (finishPortal != null)
+            {
+                if (AllLightsCollected(numLightsCollected))
+                    finishPortal.SetActive(true);
+                else
+                    finishPortal.SetActive(false);
+            }
         }
 
 
@@ -155,10 +158,20 @@ public class GameController : MonoBehaviour {
         TimeText.gameObject.SetActive(true);
     }
 
+    public void RestartLevel()
+    {
+        GoToGivenLevel(currentLevel + 1);
+    }
+
     private bool AllLightsCollected(int collected)
     {
         int numLightsInCurLevel = lights.transform.childCount;
         if (collected == numLightsInCurLevel) return true;
         return false;
+    }
+
+    public int GetNumLightsInCurrentLevel()
+    {
+        return lights.transform.childCount;
     }
 }

@@ -51,4 +51,11 @@ public class MenuController : MonoBehaviour {
         Debug.Log("MainMenuController : Quitting Game");
         Application.Quit();
     }
+
+    public void RestartLevel()
+    {
+        GameController.instance.RestartLevel();
+        Time.timeScale = 1f;
+        GameIsPaused = false;
+    }
 }

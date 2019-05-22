@@ -38,7 +38,7 @@ public class MainMenuCameraMover : MonoBehaviour
 
     }
 
-    private void ColorByMousePosition()
+    private void ColorByMousePosition() // does not work XD
     {
         int firstHalf = (int)Mathf.Floor(mouseViewportPos.x * 4095);
         int secondHalf = (int)Mathf.Floor(mouseViewportPos.y * 4095);

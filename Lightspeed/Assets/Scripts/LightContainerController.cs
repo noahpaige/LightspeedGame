@@ -16,12 +16,14 @@ public class LightContainerController : MonoBehaviour
     private List<GameObject> lights;
     private float time;
     private bool lightsStillArranging = false;
+    private LightCollectSoundPlayer soundPlayer;
 
     private GameObject mostRecentlyCollected;
 
     // Start is called before the first frame update
     void Start()
     {
+        soundPlayer = transform.parent.Find("Light Collect Sound Player").GetComponent<LightCollectSoundPlayer>();
         lights = new List<GameObject>();
         colRadius = col.radius;
     }
@@ -147,10 +149,12 @@ public class LightContainerController : MonoBehaviour
             lights[i].GetComponent<LightController>().ResetDecayTime();
         }
         fromPositions = from;
+        soundPlayer.PlayChime(lights.Count);
     }
     
     public void RemoveLight(GameObject light)
     {
+        soundPlayer.PlayChime(lights.Count);
         lights.Remove(light);
         toPositions = GetRadialDestinationPositions(lights.Count, colRadius);
         lightsStillArranging = true;
@@ -197,5 +201,11 @@ public class LightContainerController : MonoBehaviour
     public float CalculateAnimationSpeed()
     {
         return GetLightMovementFactor() / maxLightFactor;
+    }
+
+    public float CalculateMusicSpeed()
+    {
+        if (lights.Count <= 0) return 0;
+        else                   return GetLightMovementFactor() / maxLightFactor;
     }
 }

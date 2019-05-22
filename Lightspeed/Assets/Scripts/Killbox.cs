@@ -6,17 +6,20 @@ public class Killbox : MonoBehaviour {
 
     private GameObject platforms;
     private GameObject spawnPoint;
+    private AudioSource deathSound;
 
     private void Start()
     {
         platforms = GameObject.Find("Platforms");
         spawnPoint = GameObject.Find("spawnpoint");
+        deathSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
         {
+            deathSound.Play();
             collision.gameObject.GetComponent<Rigidbody2D>().position = spawnPoint.transform.position;
             collision.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             foreach (Transform child in platforms.transform)
