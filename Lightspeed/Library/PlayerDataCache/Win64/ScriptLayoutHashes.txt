@@ -3,10 +3,18 @@ PlayerPath?
 C:/Users/Gamer/Desktop/Builds/Windows/Lightspeed.exe
 SceneListBegin?
 Assets/Scenes/MainMenu.unity
-Assets/Scenes/level3.unity
-Assets/Scenes/level4.unity
-Assets/Scenes/level2.unity
-Assets/Scenes/level1.unity
+Assets/Scenes/Levels/level12.unity
+Assets/Scenes/Levels/level11.unity
+Assets/Scenes/Levels/level10.unity
+Assets/Scenes/Levels/level9.unity
+Assets/Scenes/Levels/level8.unity
+Assets/Scenes/Levels/level7.unity
+Assets/Scenes/Levels/level6.unity
+Assets/Scenes/Levels/level5.unity
+Assets/Scenes/Levels/level4.unity
+Assets/Scenes/Levels/level3.unity
+Assets/Scenes/Levels/level2.unity
+Assets/Scenes/Levels/level1.unity
 SceneListEnd?
 a1f19ad47d3094e235f21b74dfc423a8 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessLayer
 1095ec9f3eeae7eb7d180ab9e73b4cb3 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.ExponentialFog
@@ -35,7 +43,7 @@ efe39d1922d7e0225589cee03cb2e10a Assembly-CSharp.dll:.LightController
 af93f9c42e90877a9ba31e37adfd900c Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.MotionBlur
 9ac327467393cb6c8045a2fd90ff67e2 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.DebugUIHandlerPersistentCanvas
 1f0602e7bad1e0a9cba31ce292eee8bb Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.DebugUIHandlerVBox
-0690f419f63ea93341ae77feb919c805 Assembly-CSharp.dll:.GameController
+220e6ddd79e96335071c4099f0ae46d2 Assembly-CSharp.dll:.GameController
 df234238698383141666442be576639b Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.RenderPipelineResources
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
@@ -72,7 +80,8 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 f542c1afca5bb4022f91fdda19b8d622 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.DepthOfField
 7dbf450932234158be58ca2027563dcb Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.DebugUIHandlerVector3
 98ad81e9f689a492509f07e75b810aaa Unity.TextMeshPro.dll:TMPro.TMP_InputField
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.LevelSelectController
+cf4a2308a40fb74d6d9c73691ee921bf Assembly-CSharp.dll:.LevelSelectController
+c571635425511bb694917399ddd00d8d Assembly-CSharp.dll:.LightCollectSoundPlayer
 cf9f5cf2c3145a37ac07f00e50e460f9 UnityEngine.UI.dll:UnityEngine.UI.AspectRatioFitter
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.UI.dll:UnityEngine.EventSystems.BaseInput
 5fc094978ce3e3591a7500ed380d854a UnityEngine.UI.dll:UnityEngine.UI.Button
@@ -111,7 +120,7 @@ abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.Tou
 ab6fbfe9a9b1c83be7cc9e755a33aa6b Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.ContactShadows
 e82c0521cdfe8cb6a168ef7208a98d4a Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.Vignette
 74799edd3b052593b4de1e7e4fd85030 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.ScreenSpaceReflection
-a7d65741d07f6c560ea2646f6bbf7381 Assembly-CSharp.dll:.LevelGridItemInfo
+83c078b2cf26d213f5bf5905088acace Assembly-CSharp.dll:.LevelGridItemInfo
 ce934b30e00db1993d96f9f8ba88dbe0 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.DecalProjectorComponent
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -146,7 +155,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 ea768af7fe4ca0f18f65e30dd717c8dc Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.UIFoldout
-3b7ce280b688291547e3b1ce84614023 Assembly-CSharp.dll:.LightContainerController
+78da43453ea1d63ef5ef206757287789 Assembly-CSharp.dll:.LightContainerController
 303ad70ce203ad874efe2965d0fbcff9 Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsEventTracker
 7fb9de8dcf73854b6b328eca1f7a6e6d Unity.Analytics.Tracker.dll:UnityEngine.Analytics.AnalyticsTracker
 7e6ed836cbaa230e56d6a2bbae1b9bb5 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessEffectSettings
@@ -166,14 +175,16 @@ b3ab2106268377ffe25dd18ac23dca28 Unity.TextMeshPro.dll:TMPro.TMP_Asset
 04561ab2e3fdef92bfee231b02af44b2 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.ScreenSpaceRefraction
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.DebugUpdater
 6977549dce8576b23ed89390dfc0c1eb Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.VolumetricFog
-bc43b9571022f0799d033c89440fc204 Assembly-CSharp.dll:.Killbox
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Killbox
 0b9f0087bd71ee1103efac12d949db82 Assembly-CSharp.dll:.PlatformMovementController
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.Analytics.Editor.dll:UnityEditor.Analytics.AnalyticsEventTrackerEditor
 f30fa5fb83ddf74479cf38867ce69e04 Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.ShaderWindSettings
 d6fc8d3165070298511ec776ea575626 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.PostProcessResources
 71bb6a6b6c8f052f948db64c7dd3ca4f Unity.TextMeshPro.dll:TMPro.TMP_SpriteAnimator
+cb5f891b3696c70930ce1a5be4f65dfb Assembly-CSharp.dll:.FootstepPlayer
 a53651ee3996fbba20dfe0fce02f0b23 Unity.Postprocessing.Runtime.dll:UnityEngine.Rendering.PostProcessing.AutoExposure
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.ButtonGoToMainMenu
+8f6e775214919f3f95daa21e49d1c550 Assembly-CSharp.dll:.MenuSoundController
 b21b3bd82f335b4033efbb693bbbe7bb Assembly-CSharp.dll:.MainMenuCameraMover
 b4c9a02a6ceb0bbf0a8c40ddad435dc6 Assembly-CSharp.dll:.CharacterController2D
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.MainMenuController
@@ -182,7 +193,9 @@ b4c9a02a6ceb0bbf0a8c40ddad435dc6 Assembly-CSharp.dll:.CharacterController2D
 4d51d5ccf37d2089bdfe827617b784ff Unity.RenderPipelines.Core.Runtime.dll:UnityEngine.Experimental.Rendering.VolumeProfile
 3700fe9d8d037cc7eb1145595f35277d Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.HDRenderPipelineAsset
 8d35f16c5022311c6f4d9432be73bfcf Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.DebugUIHandlerEnumField
+a6d1cf1d9a6be6132f211b337b08b79b Assembly-CSharp.dll:.TitleFlicker
 2260dfb6b5e5038b25516398953116fe Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.BakingSky
+fc22d16b68b734427920fd0f031838d8 Assembly-CSharp.dll:.MusicSpeedController
 1f0602e7bad1e0a9cba31ce292eee8bb Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.UI.DebugUIHandlerWidget
 cadf30517c697c763871277b9402353e Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.DiffusionProfileSettings
 cdf207649a8709c4bf8b3594161a4710 Assembly-CSharp.dll:.AnimationController
@@ -236,6 +249,7 @@ a6c1ceb549e595076ba286f68c242075 Unity.RenderPipelines.HighDefinition.Runtime.dl
 6f8ad5fc86878c78235c4db9af18076b Unity.RenderPipelines.HighDefinition.Runtime.dll:UnityEngine.Experimental.Rendering.HDPipeline.DensityVolume
 b9c6f7358c6c4a116c264d7c7f6f08b1 Unity.RenderPipelines.Lightweight.Runtime.dll:UnityEngine.Experimental.Rendering.LightweightPipeline.LightweightRenderPipelineEditorResources
 edf0b3a60b934a550566974ead0b5b43 Assembly-CSharp.dll:.PlayerMovement
+08731637d49c480967726f378246f9c1 Assembly-CSharp.dll:.NeonSoundPlayer
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 9b2d72155209a515197b0788f9f11a91 Unity.2D.IK.Runtime.dll:UnityEngine.Experimental.U2D.IK.LimbSolver2D
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton

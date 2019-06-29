@@ -8,30 +8,39 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 11c4e31e3345e9d42a2948a2402836fc
-  - enabled: 0
-    path: Assets/Scenes/NoahMainScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/TestStuffHere.unity
-    guid: 845116f548da64cd19c264d913a300cf
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/old level1.unity
-    guid: 3fd61daa6e7b8de4a9fce1ab9d180a70
   - enabled: 1
-    path: Assets/Scenes/Levels/level4.unity
-    guid: f7d9d0f850c69e943b2d19162a72e1e4
+    path: Assets/Scenes/Levels/level12.unity
+    guid: 1af301b15fdb7864695b3a6c99682e35
   - enabled: 1
-    path: Assets/Scenes/Levels/level5.unity
+    path: Assets/Scenes/Levels/level11.unity
+    guid: 760318839d4fbaa43976c56f2c199fc9
+  - enabled: 1
+    path: Assets/Scenes/Levels/level10.unity
+    guid: 2d22ac40cd925564ebcd087a68f5c3d7
+  - enabled: 1
+    path: Assets/Scenes/Levels/level9.unity
+    guid: 5136cb2fe9c54434182c44d319ae5596
+  - enabled: 1
+    path: Assets/Scenes/Levels/level8.unity
     guid: 327a0dddbc277bb418378043c803bed7
   - enabled: 1
-    path: Assets/Scenes/Levels/level3.unity
+    path: Assets/Scenes/Levels/level7.unity
+    guid: f7d9d0f850c69e943b2d19162a72e1e4
+  - enabled: 1
+    path: Assets/Scenes/Levels/level6.unity
     guid: 27bc35884c136024bb901a441fd59e9c
   - enabled: 1
-    path: Assets/Scenes/Levels/level2.unity
+    path: Assets/Scenes/Levels/level5.unity
     guid: 62af5ee8313007245a7d83d2a4819594
+  - enabled: 1
+    path: Assets/Scenes/Levels/level4.unity
+    guid: 21b1d6ecbb541be45b97620724d09d77
+  - enabled: 1
+    path: Assets/Scenes/Levels/level3.unity
+    guid: fe5b7de387eff0f4994ec97338f109b0
+  - enabled: 1
+    path: Assets/Scenes/Levels/level2.unity
+    guid: 4261164c668dbc4429bb9468aa71c774
   - enabled: 1
     path: Assets/Scenes/Levels/level1.unity
     guid: 905203202bf46114f9783b6e2d6ed2b4

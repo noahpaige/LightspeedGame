@@ -38,6 +38,7 @@ public static class SaveSystem {
 
     public static SaveData CreateNewSaveData()
     {
+        File.Delete(path);
         int numLevels = GameController.instance.GetNumLevels();
 
         float[]    times  = new float[numLevels];

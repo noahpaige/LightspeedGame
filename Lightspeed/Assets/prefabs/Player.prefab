@@ -4958,7 +4958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845338177737864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.002, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4888990119886518}
@@ -5162,7 +5162,7 @@ EdgeCollider2D:
   - {x: 0.31752017, y: -1.0785259}
   - {x: -0.32128605, y: -1.0796021}
   - {x: -0.37611255, y: -1.0692412}
-  - {x: -0.42452073, y: -1.0327857}
+  - {x: -0.49199378, y: -1.0273149}
   - {x: -0.48942715, y: -0.3527371}
   - {x: -0.48143005, y: 0.4404241}
   - {x: -0.40257874, y: 0.5192656}
@@ -5173,7 +5173,7 @@ EdgeCollider2D:
   - {x: 0.39666387, y: 0.52911675}
   - {x: 0.48406973, y: 0.43957925}
   - {x: 0.4817553, y: -0.35911655}
-  - {x: 0.4003088, y: -1.021733}
+  - {x: 0.4822899, y: -1.0144458}
   - {x: 0.3678056, y: -1.0637368}
   - {x: 0.32177863, y: -1.0808606}
 --- !u!1 &1926185481241132
@@ -5220,7 +5220,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.017629493}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5231,7 +5231,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.05}
+  m_Size: {x: 0.75, y: 0.08525898}
   m_EdgeRadius: 0
 --- !u!1 &207415740121865344
 GameObject:
@@ -6039,8 +6039,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9c77be7e0cae494d9b5e26b000c910d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeMin: 0.2
-  volumeMax: 0.5
+  volumeMin: 0.5
+  volumeMax: 0.87
   footstepThresholdVelocity: 2
   lowVolumeFootstepProbabilityFactor: 2
   stepSpeedModifier: 0.2
@@ -6238,8 +6238,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 91f0e97906b19d44a92059927b149966, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
-  m_Pitch: 0.75
+  m_Volume: 1
+  m_Pitch: 2
   Loop: 0
   Mute: 0
   Spatialize: 0

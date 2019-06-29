@@ -4812,6 +4812,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rays: {fileID: 7440064352201926427}
   trails: {fileID: 7441791782144187582}
+  decayTime: 10
   minMoveSpeed: 0.6
   maxMoveSpeed: 0.85
   moveSpeed: 0
@@ -4863,7 +4864,7 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
+  m_Intensity: 10
   m_Range: 3
   m_SpotAngle: 179
   m_CookieSize: 1

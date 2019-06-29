@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour {
     public static GameController instance;
     [HideInInspector] public bool curLevelIsFinished = false;
 
-    private static string[] levels   = {"level1", "level2", "level3", "level4", "level5" };
+    public string[] levels;
+
     private string          mainMenu = "MainMenu";
     private SaveData        data;
     private GameObject      Player;
@@ -20,8 +21,8 @@ public class GameController : MonoBehaviour {
     private GameObject      finishPortal;
     private TextMeshProUGUI TimeText;
     private LightContainerController lcon;
-    
 
+   
     void Awake()
     {
         if      (instance == null) { instance = this; }
@@ -60,7 +61,10 @@ public class GameController : MonoBehaviour {
             if (finishPortal != null)
             {
                 if (AllLightsCollected(numLightsCollected))
+                {
                     finishPortal.SetActive(true);
+                    finishPortal.transform.GetChild(0).gameObject.SetActive(true);
+                }
                 else
                     finishPortal.SetActive(false);
             }
@@ -81,11 +85,10 @@ public class GameController : MonoBehaviour {
         int   lightsCollected = Player.transform.Find("LightContainer").GetComponent<LightContainerController>().GetLightCount();
         float bestTime        = timer;
 
-        bool collectedMoreLights = data.lightsCollectedPerLevel[currentLevel] < lightsCollected;
-        bool fasterThanPrevious  = data.levelTimes[currentLevel] > timer || data.levelTimes[currentLevel] < 0;
 
-        if (!collectedMoreLights) lightsCollected = data.lightsCollectedPerLevel[currentLevel];
-        if (!fasterThanPrevious)  bestTime        = data.levelTimes[currentLevel];
+        bool fasterThanPrevious = data.levelTimes[currentLevel] > timer || data.levelTimes[currentLevel] < 0;
+
+        if (!fasterThanPrevious)  bestTime = data.levelTimes[currentLevel];
 
         data.UpdateDataAt(bestTime, lightsCollected, currentLevel);
         Save();
@@ -174,4 +177,6 @@ public class GameController : MonoBehaviour {
     {
         return lights.transform.childCount;
     }
+
+    public string[] GetLevelList() { return levels; }
 }

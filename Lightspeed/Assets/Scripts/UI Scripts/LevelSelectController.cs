@@ -6,6 +6,18 @@ using UnityEngine.UI;
 
 public class LevelSelectController : MonoBehaviour
 {
+    public GameObject levelMenuItemPrefab;
+    public GameObject ScrollviewContent;
+    private void Awake()
+    {
+        string[] levels = GameController.instance.GetLevelList();
+        for(int i = 1; i < levels.Length + 1; i++)
+        {
+            GameObject menuItem = Instantiate(levelMenuItemPrefab);
+            menuItem.GetComponent<LevelGridItemInfo>().LevelNumber = i;
+            menuItem.transform.SetParent(ScrollviewContent.transform);
+        }
+    }
     public void Refresh()
     {
         SaveData data = GameController.instance.GetSaveData();

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 public class LevelGridItemInfo : MonoBehaviour
 {
     public int LevelNumber;
@@ -11,10 +11,16 @@ public class LevelGridItemInfo : MonoBehaviour
     public TextMeshProUGUI LevelText;
     public TextMeshProUGUI TimeText;
 
+    public MenuSoundController msc;
+
+
+    private Button btn;
+
 
     private void Start()
     {
         UpdateLevelInfo();
+        btn = GetComponent<Button>();
     }
 
     public void GoToLevel()
@@ -41,4 +47,13 @@ public class LevelGridItemInfo : MonoBehaviour
         //LightsText.SetText("Lights: " + lightsCollected.ToString() + "/" + NumberLightsInLevel);
     }
 
+    public void CheckedPlayHoverSound()
+    {
+        if (btn.interactable) msc.PlayHoverSound();
+    }
+
+    public void CheckedPlaySelectSound()
+    {
+        if (btn.interactable) msc.PlaySelectSound();
+    }
 }
